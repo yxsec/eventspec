@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+title: "EventSpec: Defining and Detecting Event-Semantic Issues in Blockchain Ecosystems"
+type: software
+year: 2026
+authors:
+  - family-names: Liu
+    given-names: Yixuan
+  - family-names: Dong
+    given-names: Yuxin
+  - family-names: Liu
+    given-names: Ye
+  - family-names: Wu
+    given-names: Yin
+  - family-names: Zhang
+    given-names: Chengxuan
+  - family-names: Luo
+    given-names: Xiapu
+  - family-names: Li
+    given-names: Yi
+preferred-citation:
+  type: article
+  title: "EventSpec: Defining and Detecting Event-Semantic Issues in Blockchain Ecosystems"
+  authors:
+    - family-names: Liu
+      given-names: Yixuan
+    - family-names: Dong
+      given-names: Yuxin
+    - family-names: Liu
+      given-names: Ye
+    - family-names: Wu
+      given-names: Yin
+    - family-names: Zhang
+      given-names: Chengxuan
+    - family-names: Luo
+      given-names: Xiapu
+    - family-names: Li
+      given-names: Yi
+  year: 2026
+  journal: "Proceedings of the 35th ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA)"
+  month: 10

@@ -1,0 +1,20 @@
+{
+  "support_min": 20,
+  "core_support_min": 10,
+  "similarity_min": 0.65,
+  "missing_event_min": 0.9,
+  "over_emit_min": 0.9,
+  "over_emit_total_min": 0.9,
+  "unexpected_event_max": 0.1,
+  "shape_min": 0.8,
+  "param_source_min": 0.8,
+  "param_arg_min": 0.8,
+  "literal_min": 0.8,
+  "indexed_min": 0.8,
+  "guard_min": 0.8,
+  "sstore_min": 0.7,
+  "eq_min": 0.6,
+  "max_conf_width": 0.2,
+  "alpha": 1.0,
+  "top_k": 1
+}

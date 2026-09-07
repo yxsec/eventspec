@@ -1,0 +1,14 @@
+# Runtime and local-build artifacts.
+.git/
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.db
+*.sqlite*
+*.jsonl
+*.log
+tmp/
+result/
+results/

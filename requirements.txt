@@ -1,0 +1,3 @@
+# Runtime dependencies used by the released CLI and harness.
+tqdm==4.67.1
+web3==7.10.0
