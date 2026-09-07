@@ -1,8 +1,7 @@
 # EventSpec Artifact
 
 This release contains the EventSpec implementation, optional off-chain harness,
-tests, and experiment configurations. It intentionally excludes datasets,
-labels, generated findings, logs, and other run outputs.
+tests, and experiment configurations.
 
 ## Layout
 

@@ -43,7 +43,6 @@ class ShaResolver(SimStatePlugin):
         # Store here the new generated model
         sha_model = list()
 
-        # Just fix the SHAs in chronological order
         for sha_observed in self.state.sha_observed:
             log.debug(f" Fixing {sha_observed.symbol.name}")
             sha_sol = self._fix_sha(sha_observed)
@@ -57,7 +56,6 @@ class ShaResolver(SimStatePlugin):
         if len(sha_model) == 0:
             # This is the case where there are no sha_observed.
             # in this case let's just pop the solver frame
-            # because we did not fix any solution
             self.state.solver.pop()
             
         return sha_model
