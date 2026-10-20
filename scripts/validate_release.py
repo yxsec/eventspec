@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the result-free EventSpec artifact before release."""
+"""Validate the EventSpec code and curated reference materials before release."""
 
 from __future__ import annotations
 

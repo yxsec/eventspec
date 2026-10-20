@@ -11,4 +11,10 @@ copyright and license terms remain with their respective authors.
 | web3.py | Off-chain harness RPC client | MIT; pinned in `requirements.txt` and `Harness/requirements.txt`; <https://github.com/ethereum/web3.py> |
 | tqdm | Optional progress display | MIT; installed from `requirements.txt`; <https://github.com/tqdm/tqdm> |
 
-No external evaluation dataset is redistributed in this release.
+The ERC reference table contains research annotations and event declarations
+checked against the ethereum/ERCs source snapshot `491797b6` (2026-01-02).
+The referenced standards remain attributed to their authors; see
+<https://github.com/ethereum/ERCs> and <https://eips.ethereum.org/>. Archived
+default profiles are outputs of EventSpec inference over contract observations.
+Raw external contract datasets and archived evaluation verdicts are not
+redistributed in this release.

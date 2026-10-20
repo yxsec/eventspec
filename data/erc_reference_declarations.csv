@@ -1,0 +1,512 @@
+erc_id,erc_title,event_name,event_signature,topic0,indexed_count,data_count,param_types,param_names,Conditions,trigger_functions,spec_id,variant,params_json,guard_conditions_json,reference_notes
+20,Token Standard,Transfer,"Transfer(address,address,uint256)",0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef,2,1,"address,address,uint256","_from,_to,_value","balance[_from] = balance[_from] - _value
+balance[_to] = balance[_to] + _value
+_value ≥ 0
+(_from = 0x0) ⇔ (totalSupply = totalSupply + _value)","transfer,transferFrom","20::Transfer(address,address,uint256)",,"[{""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_value"", ""indexed"": false}]",[],"Ordinary transfers, including zero-value transfers, emit Transfer. On token creation, Transfer from the zero address is SHOULD, not MUST. Mint and burn must be treated as separate contexts; no subtraction from a zero-address balance is implied."
+20,Token Standard,Approval,"Approval(address,address,uint256)",0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925,2,1,"address,address,uint256","_owner,_spender,_value","allowance[_owner][_spender] = _value
+_owner = msg.sender
+_value ≥ 0",approve,"20::Approval(address,address,uint256)",,"[{""type"": ""address"", ""name"": ""_owner"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_spender"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_value"", ""indexed"": false}]",[],
+137,Ethereum Domain Name Service - Specification,Transfer,"Transfer(bytes32,address)",0xd4735d920b0f87494915f556dd9b54c8f309026070caea5c737245152564d266,1,1,"bytes32,address","node,owner",records[node].owner = owner,setOwner,"137::Transfer(bytes32,address)",,"[{""type"": ""bytes32"", ""name"": ""node"", ""indexed"": true}, {""type"": ""address"", ""name"": ""owner"", ""indexed"": false}]",[],
+137,Ethereum Domain Name Service - Specification,NewOwner,"NewOwner(bytes32,bytes32,address)",0xce0457fe73731f824cc272376169235128c118b49d344817417c6d108d155e82,2,1,"bytes32,bytes32,address","node,label,owner","records[keccak256(node,label)].owner = owner",setSubnodeOwner,"137::NewOwner(bytes32,bytes32,address)",,"[{""type"": ""bytes32"", ""name"": ""node"", ""indexed"": true}, {""type"": ""bytes32"", ""name"": ""label"", ""indexed"": true}, {""type"": ""address"", ""name"": ""owner"", ""indexed"": false}]",[],
+137,Ethereum Domain Name Service - Specification,NewResolver,"NewResolver(bytes32,address)",0x335721b01866dc23fbee8b6b2c7b1e14d6f05c28cd35a2c934239f94095602a0,1,1,"bytes32,address","node,resolver",records[node].resolver = resolver,setResolver,"137::NewResolver(bytes32,address)",,"[{""type"": ""bytes32"", ""name"": ""node"", ""indexed"": true}, {""type"": ""address"", ""name"": ""resolver"", ""indexed"": false}]",[],
+137,Ethereum Domain Name Service - Specification,AddrChanged,"AddrChanged(bytes32,address)",0x52d7d861f09ab3d26239d492e8968629f95e9e318cf0b73bfddc441522a15fd2,1,1,"bytes32,address","node,a",addresses[node] = a,setAddr,"137::AddrChanged(bytes32,address)",,"[{""type"": ""bytes32"", ""name"": ""node"", ""indexed"": true}, {""type"": ""address"", ""name"": ""a"", ""indexed"": false}]",[],
+137,Ethereum Domain Name Service - Specification,ContentChanged,"ContentChanged(bytes32,bytes32)",0x0424b6fe0d9c3bdbece0e7879dc241bb0c22e900be8b6c168b4ee08bd9bf83bc,1,1,"bytes32,bytes32","node,hash",content[node] = hash,setContent,"137::ContentChanged(bytes32,bytes32)",,"[{""type"": ""bytes32"", ""name"": ""node"", ""indexed"": true}, {""type"": ""bytes32"", ""name"": ""hash"", ""indexed"": false}]",[],
+173,Contract Ownership Standard,OwnershipTransferred,"OwnershipTransferred(address,address)",0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0,2,0,"address,address","previousOwner,newOwner",owner = newOwner,transferOwnership,"173::OwnershipTransferred(address,address)",,"[{""type"": ""address"", ""name"": ""previousOwner"", ""indexed"": true}, {""type"": ""address"", ""name"": ""newOwner"", ""indexed"": true}]",[],
+223,Token with transaction handling model,Transfer,"Transfer(address,address,uint256,bytes)",0xe19260aff97b920c7df27010903aeb9c8d2be5d310a2c67824cf3f15396e4c16,2,2,"address,address,uint256,bytes","_from,_to,_value,_data","balance[_from] = balance[_from] - _value
+balance[_to] = balance[_to] + _value
+_value ≥ 0
+(_from = 0x0) ⇔ (totalSupply = totalSupply + _value)","transfer(address,uint256),transfer(address,uint256,bytes)","223::Transfer(address,address,uint256,bytes)",,"[{""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_value"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""_data"", ""indexed"": false}]",[],
+721,Non-Fungible Token Standard,Transfer,"Transfer(address,address,uint256)",0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef,3,0,"address,address,uint256","_from,_to,_tokenId","ownerOf[_tokenId] = _to
+balance[_from] = balance[_from] - 1
+balance[_to] = balance[_to] + 1
+tokenApproval[_tokenId] = 0x0
+(_from = 0x0) ∨ (_to = 0x0) ∨ (_from ≠ 0x0 ∧ _to ≠ 0x0)","transferFrom,safeTransferFrom,safeTransferFrom(bytes),_transfer,_mint,_safeMint,_burn","721::Transfer(address,address,uint256)",,"[{""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_tokenId"", ""indexed"": true}]",[],
+721,Non-Fungible Token Standard,Approval,"Approval(address,address,uint256)",0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925,3,0,"address,address,uint256","_owner,_approved,_tokenId","ownerOf[_tokenId] = _owner
+tokenApproval[_tokenId] = _approved","approve,_approve","721::Approval(address,address,uint256)",,"[{""type"": ""address"", ""name"": ""_owner"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_approved"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_tokenId"", ""indexed"": true}]",[],
+721,Non-Fungible Token Standard,ApprovalForAll,"ApprovalForAll(address,address,bool)",0x17307eab39ab6107e8899845ad3d59bd9653f200f220920489ca2b5937696c31,2,1,"address,address,bool","_owner,_operator,_approved","operatorApproval[_owner][_operator] = _approved
+_owner = msg.sender","setApprovalForAll,_setApprovalForAll","721::ApprovalForAll(address,address,bool)",,"[{""type"": ""address"", ""name"": ""_owner"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_operator"", ""indexed"": true}, {""type"": ""bool"", ""name"": ""_approved"", ""indexed"": false}]",[],
+777,Token Standard,Sent,"Sent(address,address,address,uint256,bytes,bytes)",0x06b541ddaa720db2b10a4d0cdac39b8d360425fc073085fac19bc82614677987,3,3,"address,address,address,uint256,bytes,bytes","operator,from,to,amount,data,operatorData","balance[from] = balance[from] - amount
+balance[to] = balance[to] + amount
+amount ≥ 0","send,operatorSend","777::Sent(address,address,address,uint256,bytes,bytes)",,"[{""type"": ""address"", ""name"": ""operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""amount"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""data"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""operatorData"", ""indexed"": false}]",[],
+777,Token Standard,Minted,"Minted(address,address,uint256,bytes,bytes)",0x2fe5be0146f74c5bce36c0b80911af6c7d86ff27e89d5cfa61fc681327954e5d,2,3,"address,address,uint256,bytes,bytes","operator,to,amount,data,operatorData","totalSupply = totalSupply + amount
+balance[to] = balance[to] + amount
+amount ≥ 0",_mint,"777::Minted(address,address,uint256,bytes,bytes)",,"[{""type"": ""address"", ""name"": ""operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""amount"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""data"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""operatorData"", ""indexed"": false}]",[],
+777,Token Standard,Burned,"Burned(address,address,uint256,bytes,bytes)",0xa78a9be3a7b862d26933ad85fb11d80ef66b8f972d7cbba06621d583943a4098,2,3,"address,address,uint256,bytes,bytes","operator,from,amount,data,operatorData","totalSupply = totalSupply - amount
+balance[from] = balance[from] - amount
+amount ≥ 0","burn,operatorBurn","777::Burned(address,address,uint256,bytes,bytes)",,"[{""type"": ""address"", ""name"": ""operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""amount"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""data"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""operatorData"", ""indexed"": false}]",[],
+777,Token Standard,AuthorizedOperator,"AuthorizedOperator(address,address)",0xf4caeb2d6ca8932a215a353d0703c326ec2d81fc68170f320eb2ab49e9df61f9,2,0,"address,address","operator,holder","operatorApproval[holder][operator] = true
+holder ≠ 0x0
+operator ≠ holder",authorizeOperator,"777::AuthorizedOperator(address,address)",,"[{""type"": ""address"", ""name"": ""operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""holder"", ""indexed"": true}]","[{""expression"": ""holder ≠ 0x0"", ""kind"": ""value_precondition"", ""scope"": ""authorizeOperator"", ""review_status"": ""needs_review"", ""note"": ""Keep the legacy assumption identifiable; verify whether this is an explicit check or an implicit caller property."", ""source"": ""legacy Conditions""}, {""expression"": ""operator ≠ holder"", ""kind"": ""value_precondition"", ""scope"": ""authorizeOperator"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}]",
+777,Token Standard,RevokedOperator,"RevokedOperator(address,address)",0x50546e66e5f44d728365dc3908c63bc5cfeeab470722c1677e3073a6ac294aa1,2,0,"address,address","operator,holder","operatorApproval[holder][operator] = false
+holder ≠ 0x0
+operator ≠ holder",revokeOperator,"777::RevokedOperator(address,address)",,"[{""type"": ""address"", ""name"": ""operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""holder"", ""indexed"": true}]","[{""expression"": ""holder ≠ 0x0"", ""kind"": ""value_precondition"", ""scope"": ""revokeOperator"", ""review_status"": ""needs_review"", ""note"": ""Keep the legacy assumption identifiable; verify whether this is an explicit check or an implicit caller property."", ""source"": ""legacy Conditions""}, {""expression"": ""operator ≠ holder"", ""kind"": ""value_precondition"", ""scope"": ""revokeOperator"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}]",
+820/1820,Pseudo-introspection Registry Contract,InterfaceImplementerSet,"InterfaceImplementerSet(address,bytes32,address)",0x93baa6efbd2244243bfee6ce4cfdd1d04fc4c0e9a786abd3a41313bd352db153,3,0,"address,bytes32,address","addr,interfaceHash,implementer","interfaces[addr][interfaceHash] = implementer
+mgr(addr) = msg.sender
+¬isERC165(interfaceHash)
+(implementer = 0x0) ∨ (implementer = msg.sender) ∨ (canImpl(implementer, interfaceHash, addr) = ERC820_ACCEPT_MAGIC)",setInterfaceImplementer,"820/1820::InterfaceImplementerSet(address,bytes32,address)",,"[{""type"": ""address"", ""name"": ""addr"", ""indexed"": true}, {""type"": ""bytes32"", ""name"": ""interfaceHash"", ""indexed"": true}, {""type"": ""address"", ""name"": ""implementer"", ""indexed"": true}]",[],
+820/1820,Pseudo-introspection Registry Contract,ManagerChanged,"ManagerChanged(address,address)",0x605c2dbf762e5f7d60a546d42e7205dcb1b011ebc62a61736a57c9089d3a4350,2,0,"address,address","addr,newManager","mgr(addr) = (newManager = addr ? addr : newManager)
+mgr(addr) = msg.sender",setManager,"820/1820::ManagerChanged(address,address)",,"[{""type"": ""address"", ""name"": ""addr"", ""indexed"": true}, {""type"": ""address"", ""name"": ""newManager"", ""indexed"": true}]",[],
+1155,Multi Token Standard,TransferSingle,"TransferSingle(address,address,address,uint256,uint256)",0xc3d58168c5ae7397731d063d5bbf3d657854427343f4c083240f7aacaa2d0f62,3,2,"address,address,address,uint256,uint256","_operator,_from,_to,_id,_value","_to ≠ 0x0
+(_operator = _from) ∨ approvedForAll[_from][_operator]
+balance[_from][_id] = balance[_from][_id] - _value
+balance[_to][_id] = balance[_to][_id] + _value
+_value ≥ 0
+(_from = 0x0) ⇒ (supply[_id] = supply[_id] + _value)
+(_to = 0x0) ⇒ (supply[_id] = supply[_id] - _value)","safeTransferFrom,mint,burn","1155::TransferSingle(address,address,address,uint256,uint256)",,"[{""type"": ""address"", ""name"": ""_operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_id"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""_value"", ""indexed"": false}]","[{""expression"": ""_to ≠ 0x0"", ""kind"": ""value_precondition"", ""scope"": ""safeTransferFrom"", ""review_status"": ""scoped_not_event_wide"", ""note"": ""Not an event-wide condition: burning sets the event recipient to zero; token-creation announcement can also use zero."", ""source"": ""legacy Conditions""}, {""expression"": ""(_operator = _from) ∨ approvedForAll[_from][_operator]"", ""kind"": ""authorization"", ""scope"": ""ordinary transfer through safeTransferFrom"", ""review_status"": ""scoped_not_event_wide"", ""note"": ""Minting and burning need separate applicability review."", ""source"": ""legacy Conditions""}]","Transfers, including zero-value transfers, minting and burning, emit TransferSingle or TransferBatch as applicable. Mint: _from = 0. Burn: _to = 0. The non-zero-recipient precondition belongs to safeTransferFrom, not to every event occurrence."
+1155,Multi Token Standard,TransferBatch,"TransferBatch(address,address,address,uint256[],uint256[])",0x4a39dc06d4c0dbc64b70af90fd698a233a518aa5d07e595d983b8c0526c8f7fb,3,2,"address,address,address,uint256[],uint256[]","_operator,_from,_to,_ids,_values","_to ≠ 0x0
+len(_ids) = len(_values)
+(_operator = _from) ∨ approvedForAll[_from][_operator]
+∀i:
+balance[_from][_ids[i]] = balance[_from][_ids[i]] - _values[i]
+balance[_to][_ids[i]] = balance[_to][_ids[i]] + _values[i]
+_values[i] ≥ 0
+(_from = 0x0) ⇒ (∀i: supply[_ids[i]] = supply[_ids[i]] + _values[i])
+(_to = 0x0) ⇒ (∀i: supply[_ids[i]] = supply[_ids[i]] - _values[i])","safeBatchTransferFrom,mintBatch,burnBatch","1155::TransferBatch(address,address,address,uint256[],uint256[])",,"[{""type"": ""address"", ""name"": ""_operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_to"", ""indexed"": true}, {""type"": ""uint256[]"", ""name"": ""_ids"", ""indexed"": false}, {""type"": ""uint256[]"", ""name"": ""_values"", ""indexed"": false}]","[{""expression"": ""_to ≠ 0x0"", ""kind"": ""value_precondition"", ""scope"": ""safeBatchTransferFrom"", ""review_status"": ""scoped_not_event_wide"", ""note"": ""Not an event-wide condition: burning sets the event recipient to zero; token-creation announcement can also use zero."", ""source"": ""legacy Conditions""}, {""expression"": ""(_operator = _from) ∨ approvedForAll[_from][_operator]"", ""kind"": ""authorization"", ""scope"": ""ordinary transfer through safeBatchTransferFrom"", ""review_status"": ""scoped_not_event_wide"", ""note"": ""Minting and burning need separate applicability review."", ""source"": ""legacy Conditions""}, {""expression"": ""len(_ids) = len(_values)"", ""kind"": ""value_precondition"", ""scope"": ""safeBatchTransferFrom"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}]",_ids and _values have matching lengths and corresponding token IDs and amounts. Mint: _from = 0. Burn: _to = 0. Do not impose _to != 0 on burn events. Dynamic-array ABI words are not the number of event arguments.
+1155,Multi Token Standard,URI,"URI(string,uint256)",0x6bb7ff708619ba0610cba295a58592e0451dee2622938c8755667688daf3529b,1,1,"string,uint256","_value,_id",uri[_id] = _value,"setURI,mint","1155::URI(string,uint256)",,"[{""type"": ""string"", ""name"": ""_value"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""_id"", ""indexed"": true}]",[],The event's _value is the metadata URI for _id. _value is non-indexed and _id is indexed. The standard does not require a particular storage mapping or administrative guard implementation.
+1967,Proxy Storage Slots,Upgraded,Upgraded(address),0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b,1,0,address,implementation,"slot[IMPLEMENTATION_SLOT] = implementation
+implementation ≠ 0x0","_upgradeTo,_upgradeToAndCall,_upgradeToAndCallSecure",1967::Upgraded(address),,"[{""type"": ""address"", ""name"": ""implementation"", ""indexed"": true}]","[{""expression"": ""implementation ≠ 0x0"", ""kind"": ""value_precondition"", ""scope"": ""legacy implementation model"", ""review_status"": ""not_universal_erc_requirement"", ""note"": ""Preserved for reference, not promoted to a required guard for every ERC-1967 implementation."", ""source"": ""legacy Conditions""}]","When the implementation slot changes, the corresponding event SHOULD be emitted, including initialization. Do not promote reference-implementation non-zero checks or access-control policies to universal ERC requirements."
+1967,Proxy Storage Slots,AdminChanged,"AdminChanged(address,address)",0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f,0,2,"address,address","previousAdmin,newAdmin","previousAdmin = slot[ADMIN_SLOT]
+slot[ADMIN_SLOT] = newAdmin
+newAdmin ≠ 0x0",_changeAdmin,"1967::AdminChanged(address,address)",,"[{""type"": ""address"", ""name"": ""previousAdmin"", ""indexed"": false}, {""type"": ""address"", ""name"": ""newAdmin"", ""indexed"": false}]","[{""expression"": ""newAdmin ≠ 0x0"", ""kind"": ""value_precondition"", ""scope"": ""legacy implementation model"", ""review_status"": ""not_universal_erc_requirement"", ""note"": ""Preserved for reference, not promoted to a required guard for every ERC-1967 implementation."", ""source"": ""legacy Conditions""}]","When the admin slot changes, the corresponding event SHOULD be emitted. Do not assume the new admin must be non-zero as an event-wide normative requirement."
+1967,Proxy Storage Slots,BeaconUpgraded,BeaconUpgraded(address),0x1cf3b03a6cf19fa2baba4df148e9dcabedea7f8a5c07840e207e5c089be95d3e,1,0,address,beacon,"slot[BEACON_SLOT] = beacon
+beacon ≠ 0x0",_upgradeBeaconToAndCall,1967::BeaconUpgraded(address),,"[{""type"": ""address"", ""name"": ""beacon"", ""indexed"": true}]",[],
+2135,"Consumable Interface (Tickets, etc)",OnConsumption,"OnConsumption(address,uint256,uint256,bytes)",0xe980346e48104399bbc0129fadcf85d695e39e759b84d22826b37a0f84ec9c92,2,2,"address,uint256,uint256,bytes","consumer,assetId,amount,data","isConsumableBy(consumer, assetId, amount) = true
+balance[holder(assetId)][assetId] = balance[holder(assetId)][assetId] - amount
+totalSupply[assetId] = totalSupply[assetId] - amount
+Transfer(holder(assetId), 0x0, assetId) (if ERC-721)
+TransferSingle(msg.sender, holder(assetId), 0x0, assetId, amount) (if ERC-1155)",consume,"2135::OnConsumption(address,uint256,uint256,bytes)",,"[{""type"": ""address"", ""name"": ""consumer"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""assetId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""amount"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""data"", ""indexed"": false}]",[],
+2309,ERC-721 Consecutive Transfer Extension,ConsecutiveTransfer,"ConsecutiveTransfer(uint256,uint256,address,address)",0xdeaa91b6123d068f5821d0fb0678463d1a8a6079fe8af5de3ce5e896dcf9133d,3,1,"uint256,uint256,address,address","fromTokenId,toTokenId,fromAddress,toAddress","fromTokenId ≤ toTokenId
+(fromAddress = 0x0) ∨ (toAddress = 0x0) ∨ (fromAddress ≠ 0x0 ∧ toAddress ≠ 0x0)
+∀ tid ∈ [fromTokenId, toTokenId], owner[tid] = toAddress
+fromAddress = 0x0 ⇔ mint
+toAddress = 0x0 ⇔ burn","batchMint,batchTransfer,batchBurn","2309::ConsecutiveTransfer(uint256,uint256,address,address)",,"[{""type"": ""uint256"", ""name"": ""fromTokenId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""toTokenId"", ""indexed"": false}, {""type"": ""address"", ""name"": ""fromAddress"", ""indexed"": true}, {""type"": ""address"", ""name"": ""toAddress"", ""indexed"": true}]","[{""expression"": ""fromTokenId ≤ toTokenId"", ""kind"": ""value_precondition"", ""scope"": ""consecutive token range"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}]",
+2535,"Diamonds, Multi-Facet Proxy",DiamondCut,"DiamondCut((address,uint8,bytes4[])[],address,bytes)",0x8faa70878671ccd212d20771b795c50af8fd3ff6cf27f4bde57e5d4de0aeb673,0,3,"(address,uint8,bytes4[])[],address,bytes","_diamondCut,_init,_calldata","∀cut ∈ _diamondCut, ∀s ∈ cut.functionSelectors:
+(cut.action = Add) -> (selectorToFacet[s] = cut.facetAddress ∧ old(selectorToFacet[s]) = 0x0)
+(cut.action = Replace) -> (selectorToFacet[s] = cut.facetAddress ∧ old(selectorToFacet[s]) ≠ 0x0 ∧ old(selectorToFacet[s]) ≠ cut.facetAddress ∧ ¬immutable(s))
+(cut.action = Remove) -> (selectorToFacet[s] = 0x0 ∧ old(selectorToFacet[s]) ≠ 0x0 ∧ ¬immutable(s))
+(_init = 0x0) ∨ (delegatecall(_init, _calldata) = true)",diamondCut,"2535::DiamondCut((address,uint8,bytes4[])[],address,bytes)",,"[{""type"": ""(address,uint8,bytes4[])[]"", ""name"": ""_diamondCut"", ""indexed"": false}, {""type"": ""address"", ""name"": ""_init"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""_calldata"", ""indexed"": false}]","[{""expression"": ""old(selectorToFacet[s]) = 0x0"", ""kind"": ""state_precondition"", ""scope"": ""cut.action = Add"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}, {""expression"": ""old(selectorToFacet[s]) ≠ 0x0"", ""kind"": ""state_precondition"", ""scope"": ""cut.action = Replace or Remove"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}, {""expression"": ""old(selectorToFacet[s]) ≠ cut.facetAddress"", ""kind"": ""state_precondition"", ""scope"": ""cut.action = Replace"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}, {""expression"": ""¬immutable(s)"", ""kind"": ""state_precondition"", ""scope"": ""cut.action = Replace or Remove"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}, {""expression"": ""(_init = 0x0) ∨ (delegatecall(_init, _calldata) = true)"", ""kind"": ""call_success_condition"", ""scope"": ""initialization branch"", ""review_status"": ""needs_review"", ""note"": ""A delegatecall success condition is not an owner/role authorization category."", ""source"": ""legacy Conditions""}]",
+3475,Abstract Storage Bonds,Issue,"Issue(address,address,(uint256,uint256,uint256)[])",0x4623e64c229a38d0d39f345a5636f4aaad36652b7a59cc3cfee2b2e2cf37bdf3,2,1,"address,address,(uint256,uint256,uint256)[]","_operator,_to,_transactions","∀ t ∈ _transactions:
+t._amount > 0
+balance[_to][t.classId][t.nonceId] = balance[_to][t.classId][t.nonceId] + t._amount
+activeSupply[t.classId][t.nonceId] = activeSupply[t.classId][t.nonceId] + t._amount
+totalSupply[t.classId][t.nonceId] = totalSupply[t.classId][t.nonceId] + t._amount
+_operator = bank",issue,"3475::Issue(address,address,(uint256,uint256,uint256)[])",,"[{""type"": ""address"", ""name"": ""_operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_to"", ""indexed"": true}, {""type"": ""(uint256,uint256,uint256)[]"", ""name"": ""_transactions"", ""indexed"": false}]",[],
+3475,Abstract Storage Bonds,Redeem,"Redeem(address,address,(uint256,uint256,uint256)[])",0x9f652ddea6a7fd228f90e8d46f86b0e86d8299f8ca1415c7d6ab58bbe1cd632c,2,1,"address,address,(uint256,uint256,uint256)[]","_operator,_from,_transactions","∀ t ∈ _transactions:
+t._amount > 0
+balance[_from][t.classId][t.nonceId] = balance[_from][t.classId][t.nonceId] - t._amount
+activeSupply[t.classId][t.nonceId] = activeSupply[t.classId][t.nonceId] - t._amount
+redeemedSupply[t.classId][t.nonceId] = redeemedSupply[t.classId][t.nonceId] + t._amount
+_operator = bank
+maturityOK(t.classId, t.nonceId) = true",redeem,"3475::Redeem(address,address,(uint256,uint256,uint256)[])",,"[{""type"": ""address"", ""name"": ""_operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""(uint256,uint256,uint256)[]"", ""name"": ""_transactions"", ""indexed"": false}]",[],
+3475,Abstract Storage Bonds,burn,"burn(address,address,(uint256,uint256,uint256)[])",0x7393a8753e864b8b1816e1cbf9dbd3ba637a9bc5e8970b95ff17c8129594c93b,0,3,"address,address,(uint256,uint256,uint256)[]","_operator,_owner,_transactions","∀ t ∈ _transactions:
+t._amount > 0
+balance[_owner][t.classId][t.nonceId] = balance[_owner][t.classId][t.nonceId] - t._amount
+activeSupply[t.classId][t.nonceId] = activeSupply[t.classId][t.nonceId] - t._amount
+burnedSupply[t.classId][t.nonceId] = burnedSupply[t.classId][t.nonceId] + t._amount
+_operator = controller
+maturityOK(t.classId, t.nonceId) = true",burn,"3475::burn(address,address,(uint256,uint256,uint256)[])",,"[{""type"": ""address"", ""name"": ""_operator"", ""indexed"": false}, {""type"": ""address"", ""name"": ""_owner"", ""indexed"": false}, {""type"": ""(uint256,uint256,uint256)[]"", ""name"": ""_transactions"", ""indexed"": false}]",[],
+3475,Abstract Storage Bonds,Transfer,"Transfer(address,address,address,(uint256,uint256,uint256)[])",0x75fabf31534d6cddc003931b8cffc1effeea3ee3125535e609d386c8bf9ebdc4,3,1,"address,address,address,(uint256,uint256,uint256)[]","_operator,_from,_to,_transactions","∀ t ∈ _transactions:
+t._amount > 0
+_from != 0x0
+_to != 0x0
+balance[_from][t.classId][t.nonceId] = balance[_from][t.classId][t.nonceId] - t._amount
+balance[_to][t.classId][t.nonceId] = balance[_to][t.classId][t.nonceId] + t._amount
+isApprovedFor(_from, _operator, t.classId) = true ∨ allowance(_from, _operator, t.classId, t.nonceId) ≥ t._amount","transferFrom,transferAllowanceFrom","3475::Transfer(address,address,address,(uint256,uint256,uint256)[])",,"[{""type"": ""address"", ""name"": ""_operator"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_to"", ""indexed"": true}, {""type"": ""(uint256,uint256,uint256)[]"", ""name"": ""_transactions"", ""indexed"": false}]",[],
+3525,Semi-Fungible Token,TransferValue,"TransferValue(uint256,uint256,uint256)",0x0b2aac84f3ec956911fd78eae5311062972ff949f38412e8da39069d9f068cc6,2,1,"uint256,uint256,uint256","_fromTokenId,_toTokenId,_value","value[_fromTokenId] = value[_fromTokenId] - _value
+value[_toTokenId] = value[_toTokenId] + _value
+slot[_fromTokenId] = slot[_toTokenId]
+_value ≥ 0","transferFrom(uint256 _fromTokenId, uint256 _toTokenId, uint256 _value)","3525::TransferValue(uint256,uint256,uint256)",,"[{""type"": ""uint256"", ""name"": ""_fromTokenId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_toTokenId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_value"", ""indexed"": false}]",[],
+3525,Semi-Fungible Token,ApprovalValue,"ApprovalValue(uint256,address,uint256)",0x621b050de0ad08b51d19b48b3e6df75348c4de6bdd93e81b252ca62e28265b1b,2,1,"uint256,address,uint256","_tokenId,_operator,_value","allowance[_tokenId][_operator] = _value
+_value ≥ 0",approve,"3525::ApprovalValue(uint256,address,uint256)",,"[{""type"": ""uint256"", ""name"": ""_tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_operator"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_value"", ""indexed"": false}]",[],
+3525,Semi-Fungible Token,SlotChanged,"SlotChanged(uint256,uint256,uint256)",0xe4f48c240d3b994948aa54f3e2f5fca59263dfe1d52b6e4cf39a5d249b5ccb65,3,0,"uint256,uint256,uint256","_tokenId,_oldSlot,_newSlot","slot[_tokenId] = _newSlot
+_oldSlot = slot_pre[_tokenId]
+_newSlot ≠ _oldSlot",,"3525::SlotChanged(uint256,uint256,uint256)",,"[{""type"": ""uint256"", ""name"": ""_tokenId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_oldSlot"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_newSlot"", ""indexed"": true}]",[],
+3525,Semi-Fungible Token,ApprovalForSlot,"ApprovalForSlot(address,uint256,address,bool)",0x7bdf71e6625aa496095bf08b60c677cf81c963f402cf258981e3bd7507d3480c,3,1,"address,uint256,address,bool","_owner,_slot,_operator,_approved",isApprovedForSlot[_owner][_slot][_operator] = _approved,"setApprovalForSlot(address _owner, uint256 _slot, address _operator, bool _approved)","3525::ApprovalForSlot(address,uint256,address,bool)",,"[{""type"": ""address"", ""name"": ""_owner"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_slot"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_operator"", ""indexed"": true}, {""type"": ""bool"", ""name"": ""_approved"", ""indexed"": false}]",[],
+3643,T-REX - Token for Regulated EXchanges,AgentAdded,AgentAdded(address),0xf68e73cec97f2d70aa641fb26e87a4383686e2efacb648f2165aeb02ac562ec5,1,0,address,_agent,"isOwner(msg.sender)
+agents[_agent] = true",addAgent,3643::AgentAdded(address),,"[{""type"": ""address"", ""name"": ""_agent"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,AgentRemoved,AgentRemoved(address),0xed9c8ad8d5a0a66898ea49d2956929c93ae2e8bd50281b2ed897c5d1a6737e0b,1,0,address,_agent,"isOwner(msg.sender)
+agents[_agent] = false",removeAgent,3643::AgentRemoved(address),,"[{""type"": ""address"", ""name"": ""_agent"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,UpdatedTokenInformation,"UpdatedTokenInformation(string,string,uint8,string,address)",0x6a1105ac8148a3c319adbc369f9072573e8a11d3a3d195e067e7c40767ec54d1,0,5,"string,string,uint8,string,address","_newName,_newSymbol,_newDecimals,_newVersion,_newOnchainID","isOwner(msg.sender)
+(name,symbol,decimals,version,onchainID) updated to (_newName,_newSymbol,_newDecimals,_newVersion,_newOnchainID)","setName,setSymbol","3643::UpdatedTokenInformation(string,string,uint8,string,address)",,"[{""type"": ""string"", ""name"": ""_newName"", ""indexed"": false}, {""type"": ""string"", ""name"": ""_newSymbol"", ""indexed"": false}, {""type"": ""uint8"", ""name"": ""_newDecimals"", ""indexed"": false}, {""type"": ""string"", ""name"": ""_newVersion"", ""indexed"": false}, {""type"": ""address"", ""name"": ""_newOnchainID"", ""indexed"": false}]",[],
+3643,T-REX - Token for Regulated EXchanges,IdentityRegistryAdded,IdentityRegistryAdded(address),0xd2be862d755bca7e0d39772b2cab3a5578da9c285f69199f4c063c2294a7f36c,1,0,address,_identityRegistry,"isOwner(msg.sender)
+identityRegistry = _identityRegistry",setIdentityRegistry,3643::IdentityRegistryAdded(address),,"[{""type"": ""address"", ""name"": ""_identityRegistry"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,ComplianceAdded,ComplianceAdded(address),0x7f3a888862559648ec01d97deb7b5012bff86dc91e654a1de397170db40e35b6,1,0,address,_compliance,"isOwner(msg.sender)
+compliance = _compliance",setCompliance,3643::ComplianceAdded(address),,"[{""type"": ""address"", ""name"": ""_compliance"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,RecoverySuccess,"RecoverySuccess(address,address,address)",0xf0c9129a94f30f1caaceb63e44b9811d0a3edf1d6c23757f346093af5553fed0,0,3,"address,address,address","_lostWallet,_newWallet,_investorOnchainID","isAgent(sender)∨isOwner(sender)
+identityRegistry[_newWallet]=investorOnchainID
+investorOnchainID=identityRegistry[_lostWallet]
+balance[_newWallet]=balance[_lostWallet]
+rights[_newWallet]=rights[_lostWallet]
+balance[_lostWallet]=0
+rights[_lostWallet]=∅",recoveryAddress,"3643::RecoverySuccess(address,address,address)",,"[{""type"": ""address"", ""name"": ""_lostWallet"", ""indexed"": false}, {""type"": ""address"", ""name"": ""_newWallet"", ""indexed"": false}, {""type"": ""address"", ""name"": ""_investorOnchainID"", ""indexed"": false}]",[],
+3643,T-REX - Token for Regulated EXchanges,AddressFrozen,"AddressFrozen(address,bool,address)",0x7fa523c84ab8d7fc5b72f08b9e46dbbf10c39e119a075b3e317002d14bc9f436,3,0,"address,bool,address","_userAddress,_isFrozen,_owner","isAgent(msg.sender) ∨ isOwner(msg.sender)
+frozen[_userAddress] = _isFrozen
+_owner = msg.sender",setAddressFrozen,"3643::AddressFrozen(address,bool,address)",,"[{""type"": ""address"", ""name"": ""_userAddress"", ""indexed"": true}, {""type"": ""bool"", ""name"": ""_isFrozen"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_owner"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,TokensFrozen,"TokensFrozen(address,uint256)",0xa065e63c631c86f1b9f66a4a2f63f2093bf1c2168d23290259dbd969e0222a45,1,1,"address,uint256","_userAddress,_amount","isAgent(msg.sender) ∨ isOwner(msg.sender)
+frozenTokens[_userAddress] += _amount
+frozenTokens[_userAddress] ≤ balanceOf(_userAddress)",freezePartialTokens,"3643::TokensFrozen(address,uint256)",,"[{""type"": ""address"", ""name"": ""_userAddress"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_amount"", ""indexed"": false}]",[],
+3643,T-REX - Token for Regulated EXchanges,TokensUnfrozen,"TokensUnfrozen(address,uint256)",0x9bed35cb62ad0dba04f9d5bfee4b5bc91443e77da8a65c4c84834c51bb08b0d6,1,1,"address,uint256","_userAddress,_amount","isAgent(msg.sender) ∨ isOwner(msg.sender)
+frozenTokens[_userAddress] = frozenTokens[_userAddress] - _amount",unfreezePartialTokens,"3643::TokensUnfrozen(address,uint256)",,"[{""type"": ""address"", ""name"": ""_userAddress"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_amount"", ""indexed"": false}]",[],
+3643,T-REX - Token for Regulated EXchanges,Paused,Paused(address),0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258,0,1,address,_userAddress,"isAgent(msg.sender) ∨ isOwner(msg.sender)
+paused = true
+_userAddress = msg.sender",pause,3643::Paused(address),,"[{""type"": ""address"", ""name"": ""_userAddress"", ""indexed"": false}]","[{""expression"": ""isAgent(msg.sender) ∨ isOwner(msg.sender)"", ""kind"": ""authorization"", ""scope"": ""pause"", ""review_status"": ""needs_review"", ""note"": ""Recover the original role predicate; confirm its normative applicability and mapping to inferred guard categories separately."", ""source"": ""legacy Conditions""}]",
+3643,T-REX - Token for Regulated EXchanges,Unpaused,Unpaused(address),0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa,0,1,address,_userAddress,"isAgent(msg.sender) ∨ isOwner(msg.sender)
+paused = false
+_userAddress = msg.sender",unpause,3643::Unpaused(address),,"[{""type"": ""address"", ""name"": ""_userAddress"", ""indexed"": false}]","[{""expression"": ""isAgent(msg.sender) ∨ isOwner(msg.sender)"", ""kind"": ""authorization"", ""scope"": ""unpause"", ""review_status"": ""needs_review"", ""note"": ""Recover the original role predicate; confirm its normative applicability and mapping to inferred guard categories separately."", ""source"": ""legacy Conditions""}]",
+3643,T-REX - Token for Regulated EXchanges,ClaimTopicsRegistrySet,ClaimTopicsRegistrySet(address),0x7170bf15b246e880b2369cd7c67d057760d8a35149e8c64dde91efa22bcc76d0,1,0,address,claimTopicsRegistry,"isAgent(msg.sender) ∨ isOwner(msg.sender)
+topicsRegistry = claimTopicsRegistry",setClaimTopicsRegistry,3643::ClaimTopicsRegistrySet(address),,"[{""type"": ""address"", ""name"": ""claimTopicsRegistry"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,IdentityStorageSet,IdentityStorageSet(address),0x2fa8b95c1db7afe99e3398f3792f008135cedc1fa26b0bb2ecd2352cd166d53c,1,0,address,identityStorage,"isAgent(msg.sender) ∨ isOwner(msg.sender)
+identityStorage = identityStorage",setIdentityRegistryStorage,3643::IdentityStorageSet(address),,"[{""type"": ""address"", ""name"": ""identityStorage"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,TrustedIssuersRegistrySet,TrustedIssuersRegistrySet(address),0x1b98cb79e6f73020175fe87333f1b91ad6a881519c0afe30340c2599b2b4bde0,1,0,address,trustedIssuersRegistry,"isAgent(msg.sender) ∨ isOwner(msg.sender)
+issuersRegistry = trustedIssuersRegistry",setTrustedIssuersRegistry,3643::TrustedIssuersRegistrySet(address),,"[{""type"": ""address"", ""name"": ""trustedIssuersRegistry"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,IdentityRegistered,"IdentityRegistered(address,address)",0x6ae73635c50d24a45af6fbd5e016ac4bed179addbc8bf24e04ff0fcc6d33af19,2,0,"address,address","investorAddress,identity","isAgent(msg.sender)
+contains(investorAddress) = true
+identity(investorAddress) = identity","registerIdentity,batchRegisterIdentity","3643::IdentityRegistered(address,address)",,"[{""type"": ""address"", ""name"": ""investorAddress"", ""indexed"": true}, {""type"": ""address"", ""name"": ""identity"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,IdentityRemoved,"IdentityRemoved(address,address)",0x59d6590e225b81befe259af056324092801080acbb7feab310eb34678871f327,2,0,"address,address","investorAddress,identity","isAgent(msg.sender)
+contains(investorAddress) = false
+identity(investorAddress) = 0x0",deleteIdentity,"3643::IdentityRemoved(address,address)",,"[{""type"": ""address"", ""name"": ""investorAddress"", ""indexed"": true}, {""type"": ""address"", ""name"": ""identity"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,IdentityUpdated,"IdentityUpdated(address,address)",0xe98082932c8056a0f514da9104e4a66bc2cbaef102ad59d90c4b24220ebf6010,2,0,"address,address","oldIdentity,newIdentity","isAgent(msg.sender)
+identity(investorAddress) = newIdentity",updateIdentity,"3643::IdentityUpdated(address,address)",,"[{""type"": ""address"", ""name"": ""oldIdentity"", ""indexed"": true}, {""type"": ""address"", ""name"": ""newIdentity"", ""indexed"": true}]",[],
+3643,T-REX - Token for Regulated EXchanges,CountryUpdated,"CountryUpdated(address,uint16)",0x04ed3b726495c2dca1ff1215d9ca54e1a4030abb5e82b0f6ce55702416cee853,2,0,"address,uint16","investorAddress,country","isAgent(msg.sender)
+investorCountry[investorAddress] = country",updateCountry,"3643::CountryUpdated(address,uint16)",,"[{""type"": ""address"", ""name"": ""investorAddress"", ""indexed"": true}, {""type"": ""uint16"", ""name"": ""country"", ""indexed"": true}]",[],
+3643,IIdentityRegistryStorage,IdentityStored,"IdentityStored(address,address)",0x0030dea7e9c9afaa2e3c9810f2fc9b5181f1bad74ca5a8db85f746a33585e747,2,0,"address,address","investorAddress,identity","isLinkedIdentityRegistry(msg.sender)
+storedIdentity[investorAddress] = identity",addIdentityToStorage,"3643::IdentityStored(address,address)",,"[{""type"": ""address"", ""name"": ""investorAddress"", ""indexed"": true}, {""type"": ""address"", ""name"": ""identity"", ""indexed"": true}]",[],
+3643,IIdentityRegistryStorage,IdentityUnstored,"IdentityUnstored(address,address)",0xca6a4c3370b859312246e7f086284076e557997e10d856b716c23ab67067790b,2,0,"address,address","investorAddress,identity","isLinkedIdentityRegistry(msg.sender)
+storedIdentity[investorAddress] = 0x0",removeIdentityFromStorage,"3643::IdentityUnstored(address,address)",,"[{""type"": ""address"", ""name"": ""investorAddress"", ""indexed"": true}, {""type"": ""address"", ""name"": ""identity"", ""indexed"": true}]",[],
+3643,IIdentityRegistryStorage,IdentityModified,"IdentityModified(address,address)",0x556ce885dfcea52155c773f1ed2e58781c51945c13030ab8f793c61f51d1b808,2,0,"address,address","oldIdentity,newIdentity","isLinkedIdentityRegistry(msg.sender)
+storedIdentity[investorAddress] = newIdentity",modifyStoredIdentity,"3643::IdentityModified(address,address)",,"[{""type"": ""address"", ""name"": ""oldIdentity"", ""indexed"": true}, {""type"": ""address"", ""name"": ""newIdentity"", ""indexed"": true}]",[],
+3643,IIdentityRegistryStorage,CountryModified,"CountryModified(address,uint16)",0x20965fcdc6eed7ae398065b40ece4e732ba667992ca819fc54e80e9f2047c4cf,2,0,"address,uint16","investorAddress,country","isLinkedIdentityRegistry(msg.sender)
+storedInvestorCountry[investorAddress] = country",modifyStoredInvestorCountry,"3643::CountryModified(address,uint16)",,"[{""type"": ""address"", ""name"": ""investorAddress"", ""indexed"": true}, {""type"": ""uint16"", ""name"": ""country"", ""indexed"": true}]",[],
+3643,IIdentityRegistryStorage,IdentityRegistryBound,IdentityRegistryBound(address),0x500c250171aa20e861b680f93502547b9d436eda7d4c537fc360db6e0c6eedfb,1,0,address,identityRegistry,"isOwner(msg.sender)
+identityRegistry in linkedIdentityRegistries
+isLinkedIdentityRegistry(identityRegistry) = true",bindIdentityRegistry,3643::IdentityRegistryBound(address),,"[{""type"": ""address"", ""name"": ""identityRegistry"", ""indexed"": true}]",[],
+3643,IIdentityRegistryStorage,IdentityRegistryUnbound,IdentityRegistryUnbound(address),0x51f353eb5801583fdf2706e43c045b62fdf6b1566820b349390616363ecf72c9,1,0,address,identityRegistry,"isOwner(msg.sender)
+identityRegistry not in linkedIdentityRegistries
+isLinkedIdentityRegistry(identityRegistry) = false",unbindIdentityRegistry,3643::IdentityRegistryUnbound(address),,"[{""type"": ""address"", ""name"": ""identityRegistry"", ""indexed"": true}]",[],
+3643,ICompliance,TokenBound,TokenBound(address),0x2de35142b19ed5a07796cf30791959c592018f70b1d2d7c460eef8ffe713692b,0,1,address,_token,"isOwner(msg.sender) ∨ isComplianceAdmin(msg.sender)
+boundToken = _token
+isTokenBound(_token) = true",bindToken,3643::TokenBound(address),,"[{""type"": ""address"", ""name"": ""_token"", ""indexed"": false}]",[],
+3643,ICompliance,TokenUnbound,TokenUnbound(address),0x28a4ca7134a3b3f9aff286e79ad3daadb4a06d1b43d037a3a98bdc074edd9b7a,0,1,address,_token,"isOwner(msg.sender) ∨ isComplianceAdmin(msg.sender)
+boundToken = 0x0
+isTokenBound(_token) = false",unbindToken,3643::TokenUnbound(address),,"[{""type"": ""address"", ""name"": ""_token"", ""indexed"": false}]",[],
+3643,ITrustedIssuersRegistry,TrustedIssuerAdded,"TrustedIssuerAdded(address,uint256[])",0xfedc33fd34859594822c0ff6f3f4f9fc279cc6d5cae53068f706a088e4500872,1,1,"address,uint256[]","trustedIssuer,claimTopics","isOwner(msg.sender)
+trustedIssuer in trustedIssuers
+issuerClaimTopics[trustedIssuer] = claimTopics",addTrustedIssuer,"3643::TrustedIssuerAdded(address,uint256[])",,"[{""type"": ""address"", ""name"": ""trustedIssuer"", ""indexed"": true}, {""type"": ""uint256[]"", ""name"": ""claimTopics"", ""indexed"": false}]",[],
+3643,ITrustedIssuersRegistry,TrustedIssuerRemoved,TrustedIssuerRemoved(address),0x2214ded40113cc3fb63fc206cafee88270b0a903dac7245d54efdde30ebb0321,1,0,address,trustedIssuer,"isOwner(msg.sender)
+trustedIssuer not in trustedIssuers
+issuerClaimTopics[trustedIssuer] = []",removeTrustedIssuer,3643::TrustedIssuerRemoved(address),,"[{""type"": ""address"", ""name"": ""trustedIssuer"", ""indexed"": true}]",[],
+3643,ITrustedIssuersRegistry,ClaimTopicsUpdated,"ClaimTopicsUpdated(address,uint256[])",0xec753cfc52044f61676f18a11e500093a9f2b1cd5e4942bc476f2b0438159bcf,1,1,"address,uint256[]","trustedIssuer,claimTopics","isOwner(msg.sender)
+issuerClaimTopics[trustedIssuer] = claimTopics",updateIssuerClaimTopics,"3643::ClaimTopicsUpdated(address,uint256[])",,"[{""type"": ""address"", ""name"": ""trustedIssuer"", ""indexed"": true}, {""type"": ""uint256[]"", ""name"": ""claimTopics"", ""indexed"": false}]",[],
+3643,IClaimTopicsRegistry,ClaimTopicAdded,ClaimTopicAdded(uint256),0x01c928b7f7ade2949e92366aa9454dbef3a416b731cf6ec786ba9595bbd814d6,1,0,uint256,claimTopic,"isOwner(msg.sender)
+claimTopic in claimTopics",addClaimTopic,3643::ClaimTopicAdded(uint256),,"[{""type"": ""uint256"", ""name"": ""claimTopic"", ""indexed"": true}]",[],
+3643,IClaimTopicsRegistry,ClaimTopicRemoved,ClaimTopicRemoved(uint256),0x0b1381093c776453c1bbe54fd68be1b235c65db61d099cb50d194b2991e0eec5,1,0,uint256,claimTopic,"isOwner(msg.sender)
+claimTopic not in claimTopics",removeClaimTopic,3643::ClaimTopicRemoved(uint256),,"[{""type"": ""uint256"", ""name"": ""claimTopic"", ""indexed"": true}]",[],
+4400,EIP-721 Consumable Extension,ConsumerChanged,"ConsumerChanged(address,address,uint256)",0x42ef856c2602f37ce625d252830bed486c5c8e9a4de8aa36cc3d15f304eb662b,3,0,"address,address,uint256","owner,consumer,tokenId","auth(msg.sender, tokenId) = true
+consumer[tokenId] = consumer
+consumer[tokenId] ≠ ownerOf(tokenId)
+on Transfer(tokenId):
+consumer[tokenId] = 0x0",changeConsumer,"4400::ConsumerChanged(address,address,uint256)",,"[{""type"": ""address"", ""name"": ""owner"", ""indexed"": true}, {""type"": ""address"", ""name"": ""consumer"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}]",[],
+4519,Non-Fungible Tokens Tied to Physical Assets,UserAssigned,"UserAssigned(uint256,address)",0xa366111dc7688b9ffb71476107b8b733fd141e7b370cff8480c03f4ec4409cd7,2,0,"uint256,address","tokenId,_addressUser","owner = ownerOf(tokenId)
+msg.sender = owner
+addressUser[tokenId] = addressUser
+addressAsset = 0x0 -> state[tokenId] = userAssigned
+addressAsset ≠ 0x0 -> state[tokenId] = waitingForUser
+addressUser ≠ 0x0",setUser,"4519::UserAssigned(uint256,address)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_addressUser"", ""indexed"": true}]",[],
+4519,Non-Fungible Tokens Tied to Physical Assets,UserEngaged,UserEngaged(uint256),0x0a74f4ab94fad84ffc38a74f59789bf53235489daa6ae3b0010116780c1588a4,1,0,uint256,tokenId,"msg.sender = addressAsset[tokenId]
+state[tokenId] = waitingForUser
+dataEngagement[tokenId] ≠ 0
+hashK_A = hashK_UA[tokenId]
+state[tokenId] = engagedWithUser
+dataEngagement[tokenId] = 0",userEngagement,4519::UserEngaged(uint256),,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}]",[],
+4519,Non-Fungible Tokens Tied to Physical Assets,OwnerEngaged,OwnerEngaged(uint256),0xd0582651f57ffea78c4fa2df3eaf04bf2ff083277a6c1145411c72b9c1dc474c,1,0,uint256,tokenId,"msg.sender = addressAsset[tokenId]
+state[tokenId] = waitingForOwner
+dataEngagement[tokenId] ≠ 0
+hashK_A = hashK_OA[tokenId]
+state[tokenId] = engagedWithOwner
+dataEngagement[tokenId] = 0",ownerEngagement,4519::OwnerEngaged(uint256),,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}]",[],
+4519,Non-Fungible Tokens Tied to Physical Assets,TimeoutAlarm,TimeoutAlarm(uint256),0x7e1636e7e3d95ceaa354ed9d47ea056b46cbcc0c448b26c6efaac0af33100305,1,0,uint256,tokenId,block.timestamp - timestamp[tokenId] ≥ timeout[tokenId],checkTimeout,4519::TimeoutAlarm(uint256),,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}]",[],
+4626,Tokenized Vaults,Deposit,"Deposit(address,address,uint256,uint256)",0xdcbc1c05240f31ff3ad067ef1ee35ce4997762752e3a095284754544f4c709d7,2,2,"address,address,uint256,uint256","sender,owner,assets,shares","assets ≥ 0
+shares ≥ 0
+assetBalance[vault] = assetBalance[vault] + assets
+assetBalance[sender] = assetBalance[sender] - assets
+shareBalance[owner] = shareBalance[owner] + shares
+totalSupply = totalSupply + shares","deposit,mint","4626::Deposit(address,address,uint256,uint256)",,"[{""name"": ""sender"", ""indexed"": true, ""type"": ""address""}, {""name"": ""owner"", ""indexed"": true, ""type"": ""address""}, {""name"": ""assets"", ""indexed"": false, ""type"": ""uint256""}, {""name"": ""shares"", ""indexed"": false, ""type"": ""uint256""}]",[],sender exchanges assets for shares transferred to owner. Emit for deposit and mint. The standard also permits assets to be owned by the vault before deposit execution; do not require a sender asset-balance decrement during every deposit call.
+4626,Tokenized Vaults,Withdraw,"Withdraw(address,address,address,uint256,uint256)",0xfbde797d201c681b91056529119e0b02407c7bb96a4a2c75c01fc9667232c8db,3,2,"address,address,address,uint256,uint256","sender,receiver,owner,assets,shares","assets ≥ 0
+shares ≥ 0
+shareBalance[owner] = shareBalance[owner] - shares
+totalSupply = totalSupply - shares
+assetBalance[vault] = assetBalance[vault] - assets
+assetBalance[receiver] = assetBalance[receiver] + assets","withdraw,redeem","4626::Withdraw(address,address,address,uint256,uint256)",,"[{""name"": ""sender"", ""indexed"": true, ""type"": ""address""}, {""name"": ""receiver"", ""indexed"": true, ""type"": ""address""}, {""name"": ""owner"", ""indexed"": true, ""type"": ""address""}, {""name"": ""assets"", ""indexed"": false, ""type"": ""uint256""}, {""name"": ""shares"", ""indexed"": false, ""type"": ""uint256""}]",[],sender exchanges shares owned by owner for assets transferred to receiver. Emit for withdraw and redeem. Underlying-asset state is held in the asset contract; no fixed local storage layout is specified.
+4834,Hierarchical Domains,SubdomainCreate,"SubdomainCreate(address,string,address)",0x91c5fca8fe40c5c408f40db4d115910d772738007ac5a3a5b8aaddc28bab45dc,1,2,"address,string,address","sender,name,subdomain","hasDomain(name) = false
+canCreateDomain(sender, name, subdomain) = true
+domains[name] = subdomain",createDomain,"4834::SubdomainCreate(address,string,address)",,"[{""type"": ""address"", ""name"": ""sender"", ""indexed"": true}, {""type"": ""string"", ""name"": ""name"", ""indexed"": false}, {""type"": ""address"", ""name"": ""subdomain"", ""indexed"": false}]",[],
+4834,Hierarchical Domains,SubdomainUpdate,"SubdomainUpdate(address,string,address,address)",0x5adeb15aef4ef1361c9841fcb33dca150f399cdbba09323708e283986282d5b4,1,3,"address,string,address,address","sender,name,subdomain,oldSubdomain","hasDomain(name) = true
+oldSubdomain = domains[name]
+canSetDomain(sender, name, subdomain) = true
+domains[name] = subdomain",setDomain,"4834::SubdomainUpdate(address,string,address,address)",,"[{""type"": ""address"", ""name"": ""sender"", ""indexed"": true}, {""type"": ""string"", ""name"": ""name"", ""indexed"": false}, {""type"": ""address"", ""name"": ""subdomain"", ""indexed"": false}, {""type"": ""address"", ""name"": ""oldSubdomain"", ""indexed"": false}]",[],
+4834,Hierarchical Domains,SubdomainDelete,"SubdomainDelete(address,string,address)",0x22a6255e69eb6e6e2b7fc5dc4247f53aa6416a72fb7af6f1e38224a0a865cfa3,1,2,"address,string,address","sender,name,subdomain","hasDomain(name) = true
+subdomain = domains[name]
+canDeleteDomain(sender, name) = true
+delete domains[name]",deleteDomain,"4834::SubdomainDelete(address,string,address)",,"[{""type"": ""address"", ""name"": ""sender"", ""indexed"": true}, {""type"": ""string"", ""name"": ""name"", ""indexed"": false}, {""type"": ""address"", ""name"": ""subdomain"", ""indexed"": false}]",[],
+4906,EIP-721 Metadata Update Extension,MetadataUpdate,MetadataUpdate(uint256),0xf8e1a15aba9398e019f0b49df1a4fde98ee17ae345cb5f6b5e2c27f5033e8ce7,0,1,uint256,_tokenId,"exists tokenId
+metadata[tokenId] = metadata[tokenId]'",,4906::MetadataUpdate(uint256),,"[{""type"": ""uint256"", ""name"": ""_tokenId"", ""indexed"": false}]","[{""expression"": ""exists tokenId"", ""kind"": ""state_precondition"", ""scope"": ""legacy metadata-update model"", ""review_status"": ""not_universal_erc_requirement"", ""note"": ""Retained as a legacy assumption, not proof of a standard-mandated explicit guard."", ""source"": ""legacy Conditions""}]",Emit when the JSON metadata changes. Metadata may change off-chain; this event does not imply an on-chain SSTORE. Mint/burn and tokenURI-only changes have the standard's stated recommendations and exceptions.
+4906,EIP-721 Metadata Update Extension,BatchMetadataUpdate,"BatchMetadataUpdate(uint256,uint256)",0x6bd5c950a8d8df17f772f5af37cb3655737899cbf903264b9795592da439661c,0,2,"uint256,uint256","_fromTokenId,_toTokenId","_fromTokenId ≤ _toTokenId
+∀ t ∈ [_fromTokenId , _toTokenId]: metadata[t] = metadata[t]'",,"4906::BatchMetadataUpdate(uint256,uint256)",,"[{""type"": ""uint256"", ""name"": ""_fromTokenId"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""_toTokenId"", ""indexed"": false}]","[{""expression"": ""_fromTokenId ≤ _toTokenId"", ""kind"": ""value_precondition"", ""scope"": ""legacy metadata range model"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}]",Emit when JSON metadata changes for the specified range. Metadata may change off-chain; no universal on-chain metadata mapping write or particular authorization implementation is implied.
+4907,"Rental NFT, an Extension of EIP-721",UpdateUser,"UpdateUser(uint256,address,uint64)",0x4e06b4e7000e659094299b3533b47b6aa8ad048e95e872d23d1f4ee55af89cfe,2,1,"uint256,address,uint64","tokenId,user,expires","auth(msg.sender, tokenId) = true
+auth(x,t) ≡ (x = ownerOf(t)) ∨ (x = getApproved(t)) ∨ isApprovedForAll(ownerOf(t), x)
+users[tokenId].user = user
+users[tokenId].expires = expires","setUser,_beforeTokenTransfer","4907::UpdateUser(uint256,address,uint64)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""user"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""expires"", ""indexed"": false}]","[{""expression"": ""auth(msg.sender, tokenId) = true"", ""kind"": ""authorization"", ""scope"": ""setUser reference-implementation path"", ""review_status"": ""needs_review"", ""note"": ""Does not apply unconditionally to the token-transfer reset path."", ""source"": ""legacy Conditions"", ""predicate_definition"": ""auth(x,t) ≡ (x = ownerOf(t)) ∨ (x = getApproved(t)) ∨ isApprovedForAll(ownerOf(t), x)""}]",Emit when user or expires is changed; zero user means no user. Preserve tokenId/user/expires parameter roles. The reference implementation's authorization code is not a complete opcode-provenance annotation for every implementation.
+5006,"Rental NFT, NFT User Extension",CreateUserRecord,"CreateUserRecord(uint256,uint256,uint64,address,address,uint64)",0xaa05e03d03c60cd1d2749f96e50df9c0f2910357e2213b7fbb8c838c9e207d07,0,6,"uint256,uint256,uint64,address,address,uint64","recordId,tokenId,amount,owner,user,expiry","auth(msg.sender, owner) = true
+auth(x,o) ≡ (x = o) ∨ isApprovedForAll(o, x)
+balance[owner][tokenId] ≥ amount
+amount > 0
+user ≠ 0x0
+expiry > block.timestamp
+records[recordId].tokenId = tokenId
+records[recordId].owner = owner
+records[recordId].amount = amount
+records[recordId].user = user
+records[recordId].expiry = expiry
+frozen[owner][tokenId] = frozen[owner][tokenId] + amount",createUserRecord,"5006::CreateUserRecord(uint256,uint256,uint64,address,address,uint64)",,"[{""type"": ""uint256"", ""name"": ""recordId"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": false}, {""type"": ""uint64"", ""name"": ""amount"", ""indexed"": false}, {""type"": ""address"", ""name"": ""owner"", ""indexed"": false}, {""type"": ""address"", ""name"": ""user"", ""indexed"": false}, {""type"": ""uint64"", ""name"": ""expiry"", ""indexed"": false}]",[],
+5006,"Rental NFT, NFT User Extension",DeleteUserRecord,DeleteUserRecord(uint256),0xe5e4cc148925690191c27bf527786e1ffbc70eb2e0e1efc9cafc6429b1ee777a,0,1,uint256,recordId,"recordId ∈ records
+auth(msg.sender, records[recordId].owner) = true ∨ isApprovedForAll(records[recordId].owner, msg.sender)
+frozen[records[recordId].owner][records[recordId].tokenId] = frozen[...] - records[recordId].amount
+delete records[recordId]",deleteUserRecord,5006::DeleteUserRecord(uint256),,"[{""type"": ""uint256"", ""name"": ""recordId"", ""indexed"": false}]",[],
+5023,Shareable Non-Fungible Token,Share,"Share(address,address,uint256,uint256)",0xc9a349c2b09c746e2edebb75faaf556c1c0c89d2c196a1f988ece46ee152bd52,3,1,"address,address,uint256,uint256","from,to,tokenId,derivedFromtokenId","to ≠ 0x0
+exists(derivedFromtokenId) = true
+msg.sender = ownerOf(derivedFromtokenId)
+tokenId = newTokenId
+ownerOf[tokenId] = to
+derived[tokenId] = derivedFromtokenId",share,"5023::Share(address,address,uint256,uint256)",,"[{""type"": ""address"", ""name"": ""from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""derivedFromtokenId"", ""indexed"": false}]",[],
+5169,Client Script URI for Token Contracts,ScriptUpdate,ScriptUpdate(string[]),0x9538911740e5519a40db77fb5f637de0d56cdd804318d81ae270cc24fbd8479e,0,1,string[],newScriptURI,"msg.sender = owner
+scriptURI_current = newScriptURI",setScriptURI,5169::ScriptUpdate(string[]),,"[{""type"": ""string[]"", ""name"": ""newScriptURI"", ""indexed"": false}]",[],
+5192,Minimal Soulbound NFTs,Locked,Locked(uint256),0x032bc66be43dbccb7487781d168eb7bda224628a3b2c3388bdf69b532a3a1611,0,1,uint256,tokenId,"exists(tokenId) = true
+locked[tokenId] = true","mint(locked=true),setLocked(true)",5192::Locked(uint256),,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": false}]",[],
+5192,Minimal Soulbound NFTs,Unlocked,Unlocked(uint256),0xf27b6ce5b2f5e68ddb2fd95a8a909d4ecf1daaac270935fff052feacb24f1842,0,1,uint256,tokenId,"exists(tokenId) = true
+locked[tokenId] = false","mint(locked=false),setLocked(false)",5192::Unlocked(uint256),,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": false}]",[],
+5267,Retrieval of EIP-712 domain,EIP712DomainChanged,EIP712DomainChanged(),0x0a6387c9ea3628b88a633bb4f3b151770f70085117a15f9bf3787cda53f13d31,0,0,,,eip712Domain_new ≠ eip712Domain_old,updateDomainParameters,5267::EIP712DomainChanged(),,[],[],
+5380,ERC-721 Entitlement Extension,EntitlementChanged,"EntitlementChanged(address,address,uint256)",0x20bad81921d29e08df48396e2919dbf8b5904bc9765419297b68687852d085a8,3,0,"address,address,uint256","user,contract,tokenId","exists(tokenId) = true
+ownerOf(tokenId) = msg.sender
+entitlement[user][contract][tokenId] = amt'",entitle,"5380::EntitlementChanged(address,address,uint256)",,"[{""type"": ""address"", ""name"": ""user"", ""indexed"": true}, {""type"": ""address"", ""name"": ""contract"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}]",[],
+5484,Consensual Soulbound Tokens,Issued,"Issued(address,address,uint256,uint8)",0x135ffb3383e06280e062ac5095bbf8faa98517161e596a2536bd98a9a8b64a88,3,1,"address,address,uint256,uint8","from,to,tokenId,burnAuth","from ≠ 0x0
+to ≠ 0x0
+exists(tokenId) = false
+ownerOf[tokenId] = to
+issuer[tokenId] = from
+burnAuth[tokenId] = burnAuth
+transferable[tokenId] = false
+burnAuth[tokenId] ∈ {IssuerOnly, OwnerOnly, Both, Neither}","issue,mint(soulbound)","5484::Issued(address,address,uint256,uint8)",,"[{""type"": ""address"", ""name"": ""from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""uint8"", ""name"": ""burnAuth"", ""indexed"": false}]",[],
+5489,NFT Hyperlink Extension,SlotAuthorizationCreated,"SlotAuthorizationCreated(uint256,address)",0xb6aac9d4aca74cc3c9b6f10668821ed9e7c5736feeb673bbbbd8b295ba2c5936,2,0,"uint256,address","tokenId,slotManagerAddr","exists(tokenId) = true
+msg.sender = ownerOf[tokenId]
+slotAuthorized[tokenId][slotManagerAddr] = true",authorizeSlotTo,"5489::SlotAuthorizationCreated(uint256,address)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""slotManagerAddr"", ""indexed"": true}]",[],
+5489,NFT Hyperlink Extension,SlotAuthorizationRevoked,"SlotAuthorizationRevoked(uint256,address)",0xb5941f6e357083b6bcaa8e6b7ae8cc1fe09249dd08844a1b6d621170d58c69e4,2,0,"uint256,address","tokenId,slotManagerAddr","exists(tokenId) = true
+msg.sender = ownerOf[tokenId]
+slotAuthorized[tokenId][slotManagerAddr] = false
+slotURI[tokenId][slotManagerAddr] = ⊥","revokeAuthorization,revokeAllAuthorizations","5489::SlotAuthorizationRevoked(uint256,address)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""slotManagerAddr"", ""indexed"": true}]",[],
+5489,NFT Hyperlink Extension,SlotUriUpdated,"SlotUriUpdated(uint256,address,string)",0x3861e85a43f9ffebd047ed00860b7c5e4248d52895f611df7877c826ce5d2290,2,1,"uint256,address,string","tokenId,slotManagerAddr,uri","exists(tokenId) = true
+slotAuthorized[tokenId][msg.sender] = true
+msg.sender = slotManagerAddr
+slotURI[tokenId][slotManagerAddr] = uri
+uri ∈ RFC3986",setSlotUri,"5489::SlotUriUpdated(uint256,address,string)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""slotManagerAddr"", ""indexed"": true}, {""type"": ""string"", ""name"": ""uri"", ""indexed"": false}]",[],
+5507,Refundable Tokens,Refund,"Refund(address,uint256)",0xbb28353e4598c3b9199101a66e0989549b659a59a54d2c27fbb183f1932c8e6d,2,0,"address,uint256","_from,_amount","refundActive = true
+balance[_from] ≥ _amount
+balance[_from] = balance[_from] - _amount
+escrowETH[_from] = escrowETH[_from] - (_amount × refundPrice)",refund,"5507:ERC20:Refund(address,uint256)",ERC20,"[{""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_amount"", ""indexed"": true}]","[{""expression"": ""refundActive = true"", ""kind"": ""state_precondition"", ""scope"": ""ERC-20 refund eligibility"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}, {""expression"": ""balance[_from] ≥ _amount"", ""kind"": ""state_precondition"", ""scope"": ""ERC-20 refund balance eligibility"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}]",Use the selected ERC20 refund interface and its parameter roles and refund conditions. Do not mix conditions between refund interface variants. Mandatory burning and an escrow mapping are not specified by the standard.
+5507,Refundable Tokens,RefundFrom,"RefundFrom(address,address,uint256)",0x89d85f56e3b62f6b4f2e6d123c8029a54435d6a834f262d8a2fa4aa22298b7ee,3,0,"address,address,uint256","_sender,_from,_amount","refundActive = true
+allowance[_from][_sender] ≥ _amount
+balance[_from] ≥ _amount
+balance[_from] = balance[_from] - _amount
+escrowETH[_sender] = escrowETH[_sender] + (_amount × refundPrice)",refundFrom,"5507:ERC20:RefundFrom(address,address,uint256)",ERC20,"[{""type"": ""address"", ""name"": ""_sender"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_amount"", ""indexed"": true}]",[],
+5507,Refundable Tokens,Refund,"Refund(address,uint256)",0xbb28353e4598c3b9199101a66e0989549b659a59a54d2c27fbb183f1932c8e6d,2,0,"address,uint256","_from,_tokenId","refundActive[tokenId] = true
+ownerOf[tokenId] = _from
+exists(tokenId) = false
+escrowETH[_from] = escrowETH[_from] + refundPrice[tokenId]",refund,"5507:ERC721:Refund(address,uint256)",ERC721,"[{""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_tokenId"", ""indexed"": true}]","[{""expression"": ""refundActive[tokenId] = true"", ""kind"": ""state_precondition"", ""scope"": ""ERC-721 refund eligibility"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}, {""expression"": ""ownerOf[tokenId] = _from"", ""kind"": ""state_precondition"", ""scope"": ""ERC-721 refund ownership eligibility"", ""review_status"": ""needs_review"", ""note"": """", ""source"": ""legacy Conditions""}]","Use the selected ERC-721 refund interface: the indexed uint256 is a token ID, unlike the ERC-20 refund interface where it is an amount. Check the applicable refund conditions; mandatory burning and an escrow mapping are not specified by the standard."
+5507,Refundable Tokens,RefundFrom,"RefundFrom(address,address,uint256)",0x89d85f56e3b62f6b4f2e6d123c8029a54435d6a834f262d8a2fa4aa22298b7ee,3,0,"address,address,uint256","_sender,_from,_tokenId","refundActive[tokenId] = true
+approved[_from][_sender] = true
+ownerOf[tokenId] = _from
+exists(tokenId) = false
+escrowETH[_sender] = escrowETH[_sender] + refundPrice[tokenId]",refundFrom,"5507:ERC721:RefundFrom(address,address,uint256)",ERC721,"[{""type"": ""address"", ""name"": ""_sender"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_tokenId"", ""indexed"": true}]",[],
+5507,Refundable Tokens,RefundBatch,"RefundBatch(address,uint256[])",0xe4d61d97a0e512021bd12d507883ffde4735c5fe9940e5bd0d33669cb456bc7b,1,1,"address,uint256[]","_from,_tokenIds","∀ t ∈ tokenIds: refundActive[t] = true
+∀ t ∈ tokenIds: ownerOf[t] = _from
+∀ t ∈ tokenIds: exists(t) = false",refundBatch,"5507:ERC721:RefundBatch(address,uint256[])",ERC721,"[{""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""uint256[]"", ""name"": ""_tokenIds"", ""indexed"": false}]",[],
+5507,Refundable Tokens,RefundFromBatch,"RefundFromBatch(address,address,uint256)",0xacecedf0f7bd558fda7910e9761b087bf7a2babc8c4ee7e3d855be4369d1c65b,3,0,"address,address,uint256","_sender,_from,_tokenId","refundActive[tokenId] = true
+approved[_from][_sender] = true
+exists(tokenId) = false",refundFromBatch,"5507:ERC721:RefundFromBatch(address,address,uint256)",ERC721,"[{""type"": ""address"", ""name"": ""_sender"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_tokenId"", ""indexed"": true}]",[],
+5507,Refundable Tokens,Refund,"Refund(address,uint256,uint256)",0x73f04af9dcc582a923ec15d3eea990fe34adabfff2879e28d44572e01a54abb6,2,1,"address,uint256,uint256","_from,_tokenId,_amount","refundActive[tokenId] = true
+balance[_from][tokenId] ≥ _amount
+balance[_from][tokenId] = balance[_from][tokenId] - _amount
+escrowETH[_from] = escrowETH[_from] + (_amount × refundPrice[tokenId])",refund,"5507:ERC1155:Refund(address,uint256,uint256)",ERC1155,"[{""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_tokenId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""_amount"", ""indexed"": false}]",[],Use the selected ERC1155 refund interface and its parameter roles and refund conditions. Do not mix conditions between refund interface variants. Mandatory burning and an escrow mapping are not specified by the standard.
+5507,Refundable Tokens,RefundBatch,"RefundBatch(address,uint256[],uint256[])",0xe4874169faee3a7c1957cb54fc737c0e8c594f755407059b0b24acc84fb31dbe,1,2,"address,uint256[],uint256[]","_from,_tokenIds,_amounts","∀ i: refundActive[tokenIds[i]] = true
+∀ i: balance[_from][tokenIds[i]] ≥ amounts[i]",refundBatch,"5507:ERC1155:RefundBatch(address,uint256[],uint256[])",ERC1155,"[{""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""uint256[]"", ""name"": ""_tokenIds"", ""indexed"": false}, {""type"": ""uint256[]"", ""name"": ""_amounts"", ""indexed"": false}]",[],
+5507,Refundable Tokens,RefundFromBatch,"RefundFromBatch(address,address,uint256[],uint256[])",0xa2587d560f9237e53ce537218b199ae1849a580a55d90113f523debc29cdc07a,2,2,"address,address,uint256[],uint256[]","_sender,_from,_tokenId,_amounts","isApprovedForAll[_from][_sender] = true
+∀ i: refundActive[tokenIds[i]] = true
+∀ i: balance[_from][tokenIds[i]] ≥ amounts[i]",refundFromBatch,"5507:ERC1155:RefundFromBatch(address,address,uint256[],uint256[])",ERC1155,"[{""type"": ""address"", ""name"": ""_sender"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""uint256[]"", ""name"": ""_tokenId"", ""indexed"": false}, {""type"": ""uint256[]"", ""name"": ""_amounts"", ""indexed"": false}]",[],
+5521,Referable NFT,UpdateNode,"UpdateNode(uint256,address,address[],uint256[][],address[],uint256[][])",0x81bed52c04e8cd65796985202162bad7e20a8ffaa732fe2e0a0bc79f687e4d66,2,4,"uint256,address,address[],uint256[][],address[],uint256[][]","tokenId,owner,_address_referringList,_tokenIds_referringList,_address_referredList,_tokenIds_referredList","exists(tokenId) = true
+msg.sender ∈ {ownerOf[tokenId], approved[tokenId], operator[ownerOf[tokenId]][msg.sender]}
+createdTimestamp[tokenId] = block.timestamp
+referring[tokenId] = ⋃ (address_referringList , tokenIds_referringList)
+referred[tokenId] = ⋃ (address_referredList , tokenIds_referredList)
+∀ (addr, t) ∈ referring[tokenId]: ¬(addr = this ∧ t = tokenId)
+∀ (addr, t) ∈ referred[tokenId]: createdTimestamp[t] < createdTimestamp[tokenId]","setNode,setNodeReferring,setNodeReferred,setNodeReferredExternal","5521::UpdateNode(uint256,address,address[],uint256[][],address[],uint256[][])",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""owner"", ""indexed"": true}, {""type"": ""address[]"", ""name"": ""_address_referringList"", ""indexed"": false}, {""type"": ""uint256[][]"", ""name"": ""_tokenIds_referringList"", ""indexed"": false}, {""type"": ""address[]"", ""name"": ""_address_referredList"", ""indexed"": false}, {""type"": ""uint256[][]"", ""name"": ""_tokenIds_referredList"", ""indexed"": false}]",[],
+5564,Stealth Addresses,Announcement,"Announcement(uint256,address,address,bytes,bytes)",0x5f0eab8057630ba7676c49b4f21a0231414e79474595be8e4c432fbf6bf0f4e7,3,2,"uint256,address,address,bytes,bytes","schemeId,stealthAddress,caller,ephemeralPubKey,metadata","schemeId ≥ 0
+stealthAddress ≠ 0x0
+caller = msg.sender
+len(ephemeralPubKey) > 0
+len(metadata) ≥ 1
+viewTag = metadata[0]
+stealthAddress = Derive( schemeId, ephemeralPubKey, stealthMetaAddress
+)",announce,"5564::Announcement(uint256,address,address,bytes,bytes)",,"[{""type"": ""uint256"", ""name"": ""schemeId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""stealthAddress"", ""indexed"": true}, {""type"": ""address"", ""name"": ""caller"", ""indexed"": true}, {""type"": ""bytes"", ""name"": ""ephemeralPubKey"", ""indexed"": false}, {""type"": ""bytes"", ""name"": ""metadata"", ""indexed"": false}]",[],
+5585,ERC-5585,authorizeUser,"authorizeUser(uint256,address,string[],uint256)",0xbcc02b8cd3501e6cbb2d934653df3f1570726adb35ad89977e4e7484b9070235,2,2,"uint256,address,string[],uint256","tokenId,user,rights,expires","tokenId ∈ ERC721.tokenIds
+user ≠ 0x0
+ownerOf(tokenId) = msg.sender
+checkAuthorizationAvailability(tokenId) = true
+expires = now + duration
+rights ⊆ getRights()
+authorization[tokenId][user].rights = rights
+authorization[tokenId][user].expires = expires","authorizeUser(tokenId,user,duration),authorizeUser(tokenId,user,rights,duration),extendDuration(tokenId,user,duration),updateUserRights(tokenId,user,rights),transferUserRights(tokenId,newUser)","5585::authorizeUser(uint256,address,string[],uint256)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""user"", ""indexed"": true}, {""type"": ""string[]"", ""name"": ""rights"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""expires"", ""indexed"": false}]",[],
+5585,Stealth Addresses,updateUserLimit,updateUserLimit(uint256),0x5c065d92fc978d7e5d20fe36ff3df3c7bc040a68f67c0721e2262820532ccf26,0,1,uint256,userLimit,"msg.sender = contractOwner
+userLimit ≥ 0
+maxAuthorizedUsersPerNFT = userLimit",updateUserLimit,5585::updateUserLimit(uint256),,"[{""type"": ""uint256"", ""name"": ""userLimit"", ""indexed"": false}]",[],
+5606,Multiverse NFTs,Bundled,"Bundled(uint256,(address,uint256,uint256)[],address)",0x4bd442b0f8dd819cca58b245c5068aa11e9694fafc1b9de873f3f5c1d4879367,0,3,"uint256,(address,uint256,uint256)[],address","multiverseTokenID,delegateData,ownerAddress","ownerOf(multiverseTokenID) = msg.sender
+ownerAddress = msg.sender
+∀ d ∈ delegateData: d.contractAddress ≠ 0x0
+∀ d ∈ delegateData: d.quantity > 0
+∀ d ∈ delegateData: (ERC721(d.contractAddress) ⇒ d.quantity = 1)
+∀ d ∈ delegateData: (ERC1155(d.contractAddress) ⇒ balanceOf(msg.sender,d.tokenId) ≥ d.quantity)
+delegateTokens[multiverseTokenID] = delegateTokens[multiverseTokenID] ∪ delegateData","bundle,initBundle","5606::Bundled(uint256,(address,uint256,uint256)[],address)",,"[{""type"": ""uint256"", ""name"": ""multiverseTokenID"", ""indexed"": false}, {""type"": ""(address,uint256,uint256)[]"", ""name"": ""delegateData"", ""indexed"": false}, {""type"": ""address"", ""name"": ""ownerAddress"", ""indexed"": false}]",[],
+5606,Multiverse NFTs,Unbundled,"Unbundled(uint256,(address,uint256,uint256)[])",0x8659271d0a3641eef12c7562192f3e8016c196299a00ca8e0b6609b70b5697a0,0,2,"uint256,(address,uint256,uint256)[]","multiverseTokenID,delegateData","ownerOf(multiverseTokenID) = msg.sender
+∀ d ∈ delegateData: d ∈ delegateTokens[multiverseTokenID]
+delegateTokens[multiverseTokenID] = delegateTokens[multiverseTokenID] − delegateData",unbundle,"5606::Unbundled(uint256,(address,uint256,uint256)[])",,"[{""type"": ""uint256"", ""name"": ""multiverseTokenID"", ""indexed"": false}, {""type"": ""(address,uint256,uint256)[]"", ""name"": ""delegateData"", ""indexed"": false}]",[],
+5732,Commit Interface,Commit,"Commit(uint256,address,bytes32,bytes)",0x4d0f6f8ba9d40eb26a440f243716f83b75e46b78ec8436f24142b78765db198a,3,1,"uint256,address,bytes32,bytes","_timePoint,_from,_commitment,_extraData","commitments[_commitment] = true
+timePoint = ordering_value()
+_timePoint ≥ lastCommitTimePoint[_from]
+lastCommitTimePoint[_from] := _timePoint
+(_from = msg.sender) ∨ ( validateSignature( _from, _commitment, _extraData ) = true )
+_commitment ≠ 0x0
+其中：
+ordering_value() ∈ { block.timestamp, block.number, monotonic_counter }
+语义约束（标准级）：
+∀ commit_i, commit_j: if i < j then _timePoint_i ≤ _timePoint_j","commitFrom,commitFrom(msg.sender,_commitment,empty_extraData),commit","5732::Commit(uint256,address,bytes32,bytes)",,"[{""type"": ""uint256"", ""name"": ""_timePoint"", ""indexed"": true}, {""type"": ""address"", ""name"": ""_from"", ""indexed"": true}, {""type"": ""bytes32"", ""name"": ""_commitment"", ""indexed"": true}, {""type"": ""bytes"", ""name"": ""_extraData"", ""indexed"": false}]",[],
+5773,Context-Dependent Multi-Asset Tokens,AssetSet,AssetSet(uint64),0x3cd061096eaf881067d936308fbd8b81d060c45ab2ec910c02b953162befc109,0,1,uint64,assetId,"assetId > 0
+assets[assetId] = initialized",setAsset,5773::AssetSet(uint64),,"[{""type"": ""uint64"", ""name"": ""assetId"", ""indexed"": false}]",[],
+5773,Context-Dependent Multi-Asset Tokens,AssetAddedToTokens,"AssetAddedToTokens(uint256[],uint64,uint64)",0x4a85a0221f784dbe75db7c29c422f474c15bde9211a98e50a30018fa8dfa937b,2,1,"uint256[],uint64,uint64","tokenIds,assetId,replacesId","∀ t ∈ tokenIds: pendingAssets[t] := pendingAssets[t] ∪ {assetId}
+assetId > 0
+replacesId ≥ 0","addAssetToToken,addAssetToTokens","5773::AssetAddedToTokens(uint256[],uint64,uint64)",,"[{""type"": ""uint256[]"", ""name"": ""tokenIds"", ""indexed"": false}, {""type"": ""uint64"", ""name"": ""assetId"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""replacesId"", ""indexed"": true}]",[],
+5773,Context-Dependent Multi-Asset Tokens,AssetAccepted,"AssetAccepted(uint256,uint64,uint64)",0x3f2709a99f6c06b4e57bbb38eb0134332f96f51a3da314f41a515adbb28b17cc,3,0,"uint256,uint64,uint64","tokenId,assetId,replacesId","assetId ∈ pendingAssets[tokenId]
+pendingAssets[tokenId] := pendingAssets[tokenId] \ {assetId}
+activeAssets[tokenId] := activeAssets[tokenId] ∪ {assetId}
+(replacesId = 0) ∨ ( replacesId ∈ activeAssets[tokenId] ∧ activeAssets[tokenId] := activeAssets[tokenId] \ {replacesId} )
+auth(msg.sender, tokenId)",acceptAsset,"5773::AssetAccepted(uint256,uint64,uint64)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""assetId"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""replacesId"", ""indexed"": true}]",[],
+5773,Context-Dependent Multi-Asset Tokens,AssetRejected,"AssetRejected(uint256,uint64)",0x1010837a46db9510cad56c9b63e97183557a136e9d4ddbec309ce52c99afb124,2,0,"uint256,uint64","tokenId,assetId","(assetId = 0) ∨ (assetId ∈ pendingAssets[tokenId])
+pendingAssets[tokenId] := if assetId = 0 then ∅ else pendingAssets[tokenId] \ {assetId}
+auth(msg.sender, tokenId)","rejectAsset,rejectAllAssets","5773::AssetRejected(uint256,uint64)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""assetId"", ""indexed"": true}]",[],
+5773,Context-Dependent Multi-Asset Tokens,AssetPrioritySet,AssetPrioritySet(uint256),0xf0bfd70b0068f973d58178846ca67112671ec45e060838f7de5662036bcf8017,1,0,uint256,tokenId,"len(priorities[tokenId]) = len(activeAssets[tokenId])
+priorities[tokenId] := newPriorities
+auth(msg.sender, tokenId)",setPriority,5773::AssetPrioritySet(uint256),,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}]",[],
+5773,Context-Dependent Multi-Asset Tokens,ApprovalForAssets,"ApprovalForAssets(address,address,uint256)",0xb90cc0d925ac3511ab6af2d7ca73ffcf7ec4bd871fff36b958ecf440079c463e,3,0,"address,address,uint256","owner,approved,tokenId","owner = ownerOf(tokenId)
+approved ≠ owner
+assetApproval[tokenId] := approved",approveForAssets,"5773::ApprovalForAssets(address,address,uint256)",,"[{""type"": ""address"", ""name"": ""owner"", ""indexed"": true}, {""type"": ""address"", ""name"": ""approved"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}]",[],
+5773,Context-Dependent Multi-Asset Tokens,ApprovalForAllForAssets,"ApprovalForAllForAssets(address,address,bool)",0x0cff4fcf777050010027190b8061fd8bfd1de16d81b1f94e9752df1427a26235,2,1,"address,address,bool","owner,operator,approved","operator ≠ owner
+assetOperatorApproval[owner][operator] := approved",setApprovalForAllForAssets,"5773::ApprovalForAllForAssets(address,address,bool)",,"[{""type"": ""address"", ""name"": ""owner"", ""indexed"": true}, {""type"": ""address"", ""name"": ""operator"", ""indexed"": true}, {""type"": ""bool"", ""name"": ""approved"", ""indexed"": false}]",[],
+6059,Parent-Governed Nestable Non-Fungible Tokens,NestTransfer,"NestTransfer(address,address,uint256,uint256,uint256)",0x04444026cefd1b05506559cab59d1b865ae3ba4ed2fe5c894f04e522776c552d,3,2,"address,address,uint256,uint256,uint256","from,to,fromTokenId,toTokenId,tokenId","directOwner[tokenId] = (from, fromTokenId)
+directOwner[tokenId] := if toTokenId = 0 then (to, 0) else (to, toTokenId)
+tokenId ≠ 0
+(fromTokenId = 0) ∨ (from = parentContract[fromTokenId])
+(toTokenId = 0) ∨ (to = parentContract[toTokenId])","nestTransferFrom,transferChild","6059::NestTransfer(address,address,uint256,uint256,uint256)",,"[{""type"": ""address"", ""name"": ""from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""fromTokenId"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""toTokenId"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}]",[],
+6059,Parent-Governed Nestable Non-Fungible Tokens,ChildProposed,"ChildProposed(uint256,uint256,address,uint256)",0xe65085e689b77b126ba0bac3b079aa8288f19f4d5445af11c76003f8ab3075dd,3,1,"uint256,uint256,address,uint256","tokenId,childIndex,childAddress,childId","pendingChildren[tokenId][childIndex] = (childAddress, childId)
+childId ≠ 0
+tokenId ≠ 0
+¬isDescendant(tokenId, childId)","addChild,nestTransferFrom,transferChild","6059::ChildProposed(uint256,uint256,address,uint256)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""childIndex"", ""indexed"": false}, {""type"": ""address"", ""name"": ""childAddress"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""childId"", ""indexed"": true}]",[],
+6059,Parent-Governed Nestable Non-Fungible Tokens,ChildAccepted,"ChildAccepted(uint256,uint256,address,uint256)",0x29486b9e2ae569b440933a9b1b421467306fa21f3dcad439c262910a634963a9,3,1,"uint256,uint256,address,uint256","tokenId,childIndex,childAddress,childId","(childAddress, childId) ∈ pendingChildren[tokenId]
+pendingChildren[tokenId] := pendingChildren[tokenId] \ {(childAddress, childId)}
+activeChildren[tokenId] := activeChildren[tokenId] ∪ {(childAddress, childId)}
+auth(msg.sender, tokenId)",acceptChild,"6059::ChildAccepted(uint256,uint256,address,uint256)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""childIndex"", ""indexed"": false}, {""type"": ""address"", ""name"": ""childAddress"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""childId"", ""indexed"": true}]",[],
+6059,Parent-Governed Nestable Non-Fungible Tokens,AllChildrenRejected,AllChildrenRejected(uint256),0x8ac4a0d65950c3e40448afb2260e2e0ec36ea15644d9b39e37e85472e5f94451,1,0,uint256,tokenId,"pendingChildren[tokenId] := ∅
+auth(msg.sender, tokenId)",rejectAllChildren,6059::AllChildrenRejected(uint256),,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}]",[],
+6059,Parent-Governed Nestable Non-Fungible Tokens,ChildTransferred,"ChildTransferred(uint256,uint256,address,uint256,bool)",0x2bedee38cdb22411c14554191243c0e117c0088ddae3459876acd46a0fd53815,3,2,"uint256,uint256,address,uint256,bool","tokenId,childIndex,childAddress,childId,fromPending","fromPending = true ⇒ (childAddress, childId) ∈ pendingChildren[tokenId]
+fromPending = false ⇒ (childAddress, childId) ∈ activeChildren[tokenId]
+children[tokenId] := children[tokenId] \ {(childAddress, childId)}
+directOwner[childId] := if destinationId = 0 then (to, 0) else (to, destinationId)
+auth(msg.sender, tokenId)",transferChild,"6059::ChildTransferred(uint256,uint256,address,uint256,bool)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""childIndex"", ""indexed"": false}, {""type"": ""address"", ""name"": ""childAddress"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""childId"", ""indexed"": true}, {""type"": ""bool"", ""name"": ""fromPending"", ""indexed"": false}]",[],
+6105,No Intermediary NFT Trading Protocol,UpdateListing,"UpdateListing(uint256,address,uint256,uint64,address,uint256)",0x792c4ed0464942b883750bce17ade42bb5139b0f3ca005bb3f3cd1378343c119,2,4,"uint256,address,uint256,uint64,address,uint256","tokenId,from,salePrice,expires,supportedToken,benchmarkPrice","tokenId ≠ 0
+from = ownerOf(tokenId)
+salePrice > 0 ∧ expires > now ∨
+salePrice = 0 ∧ expires = 0
+listing[tokenId] := (salePrice, expires, supportedToken, benchmarkPrice)
+auth(msg.sender, tokenId)","listItem,delistItem,_beforeTokenTransfer","6105::UpdateListing(uint256,address,uint256,uint64,address,uint256)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""salePrice"", ""indexed"": false}, {""type"": ""uint64"", ""name"": ""expires"", ""indexed"": false}, {""type"": ""address"", ""name"": ""supportedToken"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""benchmarkPrice"", ""indexed"": false}]",[],
+6105,No Intermediary NFT Trading Protocol,Purchased,"Purchased(uint256,address,address,uint256,address,uint256)",0x9993750e8b5de3bf7a52b1932bc999be0f8e9c84c8d4ae842bccf2b7655d6c01,3,3,"uint256,address,address,uint256,address,uint256","tokenId,from,to,salePrice,supportedToken,royalties","tokenId ≠ 0
+from = ownerOf(tokenId)_pre
+to = msg.sender
+listing[tokenId].salePrice = salePrice
+listing[tokenId].supportedToken = supportedToken
+royalties ≥ 0
+salePrice ≥ royalties
+ownerOf(tokenId)_post = to
+listing[tokenId] := ⊥","buyItem,acceptCollectionOffer,acceptItemOffer","6105::Purchased(uint256,address,address,uint256,address,uint256)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""from"", ""indexed"": true}, {""type"": ""address"", ""name"": ""to"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""salePrice"", ""indexed"": false}, {""type"": ""address"", ""name"": ""supportedToken"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""royalties"", ""indexed"": false}]",[],
+6105,No Intermediary NFT Trading Protocol,UpdateCollectionOffer,"UpdateCollectionOffer(address,uint256,uint256,uint64,address)",0xcb7f5c2e1b7a32dad49f588e7d640f535d166b6d6a1b8354bc56aa366e16d656,1,4,"address,uint256,uint256,uint64,address","from,amount,salePrice,expires,supportedToken","from = msg.sender
+(amount > 0 ∧ salePrice > 0 ∧ expires > now) ∨
+(amount = 0 ∧ salePrice = 0 ∧ expires = 0)
+collectionOffer[from] := (amount, salePrice, expires, supportedToken)","makeCollectionOffer,cancelCollectionOffer","6105::UpdateCollectionOffer(address,uint256,uint256,uint64,address)",,"[{""type"": ""address"", ""name"": ""from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""amount"", ""indexed"": false}, {""type"": ""uint256"", ""name"": ""salePrice"", ""indexed"": false}, {""type"": ""uint64"", ""name"": ""expires"", ""indexed"": false}, {""type"": ""address"", ""name"": ""supportedToken"", ""indexed"": false}]",[],
+6105,No Intermediary NFT Trading Protocol,UpdateItemOffer,"UpdateItemOffer(uint256,address,uint256,uint64,address)",0xfae2b16052d610beebf93e8484e38dcf758c73e86920097e4220eb03da83e1a1,2,3,"uint256,address,uint256,uint64,address","tokenId,from,salePrice,expires,supportedToken","tokenId ≠ 0
+from = msg.sender
+(salePrice > 0 ∧ expires > now) ∨
+(salePrice = 0 ∧ expires = 0)
+itemOffer[tokenId][from] := (salePrice, expires, supportedToken)","makeItemOffer,cancelItemOffer","6105::UpdateItemOffer(uint256,address,uint256,uint64,address)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""from"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""salePrice"", ""indexed"": false}, {""type"": ""uint64"", ""name"": ""expires"", ""indexed"": false}, {""type"": ""address"", ""name"": ""supportedToken"", ""indexed"": false}]",[],
+6147,"Guard of NFT/SBT, an Extension of ERC-721",UpdateGuardLog,"UpdateGuardLog(uint256,address,address,uint64)",0x2700960061dd07fc2f2f287653312ad3c1f0d9307ac613c30dff7f6efbbf02c4,2,2,"uint256,address,address,uint64","tokenId,newGuard,oldGuard,expires","tokenId ≠ 0
+(oldGuard, _) = guardInfo(tokenId)_pre
+( oldGuard = 0x0 ∧ auth(msg.sender, tokenId)
+) ∨
+( oldGuard ≠ 0x0 ∧ msg.sender = oldGuard
+)
+expires > now ∨
+(expires = 0 ∧ newGuard = 0x0)
+guard[tokenId] := (newGuard, expires)
+guard[tokenId] is invalid ⇔ (expires < now) ∨ (newGuard = 0x0)","changeGuard,removeGuard,transferAndRemove,_burn","6147::UpdateGuardLog(uint256,address,address,uint64)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""newGuard"", ""indexed"": true}, {""type"": ""address"", ""name"": ""oldGuard"", ""indexed"": false}, {""type"": ""uint64"", ""name"": ""expires"", ""indexed"": false}]",[],
+6220,Composable NFTs utilizing Equippable Parts,ChildAssetEquipped,"ChildAssetEquipped(uint256,uint64,uint64,uint256,address,uint64)",0x1f5de02b1d9c93ca468f54630e1daf13f6dc458a63f8061ff73e85bf9bc38884,3,3,"uint256,uint64,uint64,uint256,address,uint64","tokenId,assetId,slotPartId,childId,childAddress,childAssetId","tokenId ≠ 0
+childId ≠ 0
+childAddress ≠ 0x0
+auth(msg.sender, tokenId)
+canTokenBeEquippedWithAssetIntoSlot( this, tokenId, childAssetId, slotPartId
+) = true
+isChildEquipped(tokenId, childAddress, childId) = false
+equipment[tokenId][assetId][slotPartId] = (childAssetId, childId, childAddress)",equip,"6220::ChildAssetEquipped(uint256,uint64,uint64,uint256,address,uint64)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""assetId"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""slotPartId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""childId"", ""indexed"": false}, {""type"": ""address"", ""name"": ""childAddress"", ""indexed"": false}, {""type"": ""uint64"", ""name"": ""childAssetId"", ""indexed"": false}]",[],
+6220,Composable NFTs utilizing Equippable Parts,ChildAssetUnequipped,"ChildAssetUnequipped(uint256,uint64,uint64,uint256,address,uint64)",0x438e039ebbba8f290f3b5d41aaf3295eccc9b5e6b0e1d52ace700772afb7da13,3,3,"uint256,uint64,uint64,uint256,address,uint64","tokenId,assetId,slotPartId,childId,childAddress,childAssetId","tokenId ≠ 0
+childId ≠ 0
+childAddress ≠ 0x0
+auth(msg.sender, tokenId)
+equipment[tokenId][assetId][slotPartId] = (childAssetId, childId, childAddress)_pre
+delete equipment[tokenId][assetId][slotPartId]",unequip,"6220::ChildAssetUnequipped(uint256,uint64,uint64,uint256,address,uint64)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""assetId"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""slotPartId"", ""indexed"": true}, {""type"": ""uint256"", ""name"": ""childId"", ""indexed"": false}, {""type"": ""address"", ""name"": ""childAddress"", ""indexed"": false}, {""type"": ""uint64"", ""name"": ""childAssetId"", ""indexed"": false}]",[],
+6220,Composable NFTs utilizing Equippable Parts,ValidParentEquippableGroupIdSet,"ValidParentEquippableGroupIdSet(uint64,uint64,address)",0x5b5af0622001a9b735a56357ddc1abd65e6a640126498674daf9d2fb05160725,2,1,"uint64,uint64,address","equippableGroupId,slotPartId,parentAddress","equippableGroupId ≠ 0
+slotPartId ≠ 0
+parentAddress ≠ 0x0
+auth(msg.sender)
+validParent[slotPartId][parentAddress] ∪= equippableGroupId","setValidParentForEquippableGroup,Catalog","6220::ValidParentEquippableGroupIdSet(uint64,uint64,address)",,"[{""type"": ""uint64"", ""name"": ""equippableGroupId"", ""indexed"": true}, {""type"": ""uint64"", ""name"": ""slotPartId"", ""indexed"": true}, {""type"": ""address"", ""name"": ""parentAddress"", ""indexed"": false}]",[],
+6220,Composable NFTs utilizing Equippable Parts,AddedPart,"AddedPart(uint64,uint8,uint8,address[],string)",0xc4715b52aed3b9dfb2fbdc63e39e234892ec1dd3811d2c671646dbfd3d32d92e,2,3,"uint64,uint8,uint8,address[],string","partId,itemType,zIndex,equippableAddresses,metadataURI","partId ≠ 0
+itemType ∈ {Slot, Fixed}
+metadataURI ≠ """"
+¬exists(parts[partId])
+parts[partId] = (itemType, zIndex, equippableAddresses, metadataURI)",addPart,"6220::AddedPart(uint64,uint8,uint8,address[],string)",,"[{""type"": ""uint64"", ""name"": ""partId"", ""indexed"": true}, {""type"": ""uint8"", ""name"": ""itemType"", ""indexed"": true}, {""type"": ""uint8"", ""name"": ""zIndex"", ""indexed"": false}, {""type"": ""address[]"", ""name"": ""equippableAddresses"", ""indexed"": false}, {""type"": ""string"", ""name"": ""metadataURI"", ""indexed"": false}]",[],
+6220,Composable NFTs utilizing Equippable Parts,AddedEquippables,"AddedEquippables(uint64,address[])",0x379edf7304a765a58c7eba1fef9bc8675355bf31e276de44d60da39bb04c76ba,1,1,"uint64,address[]","partId,equippableAddresses","partId ≠ 0
+exists(parts[partId])
+parts[partId].equippable ∪= equippableAddresses",addEquippables,"6220::AddedEquippables(uint64,address[])",,"[{""type"": ""uint64"", ""name"": ""partId"", ""indexed"": true}, {""type"": ""address[]"", ""name"": ""equippableAddresses"", ""indexed"": false}]",[],
+6220,Composable NFTs utilizing Equippable Parts,SetEquippables,"SetEquippables(uint64,address[])",0x507a75726ac34d3eb68ebf61f034616ee2030c6193bd4a9efb7e131de6c6adcc,1,1,"uint64,address[]","partId,equippableAddresses","partId ≠ 0
+exists(parts[partId])
+parts[partId].equippable := equippableAddresses",setEquippables,"6220::SetEquippables(uint64,address[])",,"[{""type"": ""uint64"", ""name"": ""partId"", ""indexed"": true}, {""type"": ""address[]"", ""name"": ""equippableAddresses"", ""indexed"": false}]",[],
+6220,Composable NFTs utilizing Equippable Parts,SetEquippableToAll,SetEquippableToAll(uint64),0x540b0b22993accb6c2b7b0f4a5bd1b7e6419708ef2a68c39f09f01c848ba4fbc,1,0,uint64,partId,"partId ≠ 0
+exists(parts[partId])
+parts[partId].equippable := *",setEquippableToAll,6220::SetEquippableToAll(uint64),,"[{""type"": ""uint64"", ""name"": ""partId"", ""indexed"": true}]",[],
+6239,Semantic Soulbound Tokens,CreateRDF,"CreateRDF(uint256,string)",0x001ff0a7f9f9bfa6a3d5d102a071d2bcae92556caf0da1318cfc2783796bab17,1,1,"uint256,string","tokenId,rdfStatements","tokenId ≠ 0
+¬exists(tokenId)_pre
+mint(tokenId)
+rdf[tokenId] = rdfStatements
+locked(tokenId) = true // inherited from ERC-5192","mint,safeMint","6239::CreateRDF(uint256,string)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""string"", ""name"": ""rdfStatements"", ""indexed"": false}]",[],
+6239,Semantic Soulbound Tokens,UpdateRDF,"UpdateRDF(uint256,string)",0x80bce0080e65769d8eee2ab07368f695e8e98b7875f29deedd95b1f202a04149,1,1,"uint256,string","tokenId,rdfStatements","tokenId ≠ 0
+exists(tokenId)
+auth(msg.sender, tokenId)
+rdf[tokenId] = rdfStatements","updateRDF,setRDF","6239::UpdateRDF(uint256,string)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""string"", ""name"": ""rdfStatements"", ""indexed"": false}]",[],
+6239,Semantic Soulbound Tokens,RemoveRDF,"RemoveRDF(uint256,string)",0x66c8585c3e15ccf8c11639fb9250cc64d2dd63c3bd7f4c5d20cd68dd9c554b05,1,1,"uint256,string","tokenId,rdfStatements","tokenId ≠ 0
+exists(tokenId)
+auth(msg.sender, tokenId)
+rdf[tokenId] = rdfStatements_pre
+burn(tokenId)
+delete rdf[tokenId]","burn,revoke","6239::RemoveRDF(uint256,string)",,"[{""type"": ""uint256"", ""name"": ""tokenId"", ""indexed"": true}, {""type"": ""string"", ""name"": ""rdfStatements"", ""indexed"": false}]",[],

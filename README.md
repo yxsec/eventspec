@@ -1,7 +1,8 @@
 # EventSpec Artifact
 
 This release contains the EventSpec implementation, optional off-chain harness,
-tests, and experiment configurations.
+tests, experiment configurations, ERC reference declarations, and archived
+default inference profiles.
 
 ## Layout
 
@@ -10,6 +11,9 @@ tests, and experiment configurations.
 - `greed/`: vendored Greed source used by symbolic mode
 - `scripts/`: analysis and experiment drivers
 - `configs/`: sensitivity configurations
+- `data/erc_reference_declarations.csv`: 135 ERC reference records with parameter
+  definitions, legacy conditions, scoped guard candidates, and correction notes
+- `profiles/default/`: compressed default event and function profiles
 - `tests/`: unit tests
 - `docs/`: algorithm and schema documentation
 - `Dockerfile`: pinned Ubuntu/Soufflé/Gigahorse/Greed environment
@@ -43,6 +47,22 @@ docker run --rm eventspec:latest python3 main.py --help
 
 For command, algorithm, schema, and experiment details, see
 [docs/TECHNICAL.md](docs/TECHNICAL.md).
+
+## Reference declarations and inferred profiles
+
+The [ERC reference table](data/erc_reference_declarations.csv) contains 135
+records from 41 ERCs and 16 specification fields. Conditions are preserved
+research annotations; `reference_notes` records event-specific corrections and
+applicability limits. `guard_conditions_json` contains scoped candidates, not
+validated event-wide guard policies. Missing parameter-origin annotations have
+not been synthesized.
+
+The archived default [event profiles](profiles/default/event_patterns.jsonl.gz)
+and [function profiles](profiles/default/function_patterns.jsonl.gz) contain
+1,246 and 211,487 JSONL records, respectively. They were inferred from contract
+observations and serve as empirical comparison inputs. Both files are compressed
+losslessly. For schema, provenance, and decompression instructions, see
+[the technical guide](docs/TECHNICAL.md#published-reference-materials).
 
 ## Citation
 
